@@ -1,0 +1,30 @@
+version: 0.2
+
+env:
+  variables:
+    S3_BUCKET: "yetenabucket"           
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+  pre_build:
+    commands:
+      - echo installing angular
+      - npm install
+      - npm install -g @angular/cli
+  build:
+    commands:
+      - echo Build started on `date`
+      - ng build --prod --aot
+    finally:
+      - command
+      - command
+  post_build:
+    commands:
+      - aws s3 cp dist/ s3://${S3_BUCKET} --recursive 
+      - echo deploy done on `date`
+artifacts:
+  files:
+    - '**/*' 
+    - location
+  base-directory: dist

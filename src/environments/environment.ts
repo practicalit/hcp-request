@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  server:'http://localhost:8082',
+  server:'http://yetena.balemuya.net',
   balemuyaEndPoint: '/ajax.php?action=addBalemuya',
   volunteerEndPoint: '/ajax.php?action=addVolunteer',
   authEndPoint: '/ajax.php?action=login',

@@ -35,6 +35,15 @@
             
           </div>
           <div [ngClass]="{'success': success, 'error': !success}">{{message}}</div>
+
+        </div>          
+        <div class="form-group">
+          <label class="form-check-label" for="message">help</label>
+          <textarea formControlName="request" class="form-control" id="message" rows="6">
+          </textarea>
+          
+        </div>
+        <div [ngClass]="{'success': success, 'error': !success}">{{help}}</div>
           <button [disabled]='!requestForm.valid' type="submit" class="btn btn-primary">Request</button>
         </form>
       </div>

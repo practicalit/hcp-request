@@ -39,18 +39,9 @@
             <small>Or sign up with credentials</small>
           </div>
           <form [formGroup]="registerForm" role="form" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-              <div class="input-group input-group-alternative mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
-                </div>
-                <select formControlName="registerAs" class="form-control" >
-                  <option value="">Registering as</option>
-                  <option value="1">Health Professional</option>
-                  <option value="2">Volunteer</option>
-                </select>
-              </div>
-            </div>
+            <option value="">Registering as</option>
+                  <input type="radio" value="1"> helth profetional
+                  <input type="radio" value="2">helth profetional
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">

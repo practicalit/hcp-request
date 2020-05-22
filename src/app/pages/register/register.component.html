@@ -40,9 +40,8 @@
           </div>
           <form [formGroup]="registerForm" role="form" (ngSubmit)="onSubmit()">
             <option value="">Registering as</option>
-                  <input type="radio" value="1"> helth professionalsS
-                  <input type="radio" value="2">volunteer
-
+                  <input type="radio" name="myRadio" value="1" ng-click="radioSelection(1)"/> helth professional
+                  <input type="radio" name="myRadio" value="2" ng-click="radioSelection(2)"/>Volunteer
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">

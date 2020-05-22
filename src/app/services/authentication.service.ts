@@ -69,7 +69,7 @@ export class AuthenticationService {
   public getFirstName(): string {
     if (this.logged) {
       let user = JSON.parse(localStorage.getItem(CURRENT_USER));
-      return user.data.firstName;
+      return user.data.first_name;
     }
     return null;
   }

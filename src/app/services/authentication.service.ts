@@ -64,6 +64,17 @@ export class AuthenticationService {
   }
 
   /**
+   * Get the id of the currently logged user.
+   */
+  public getLoggedMemberId() {
+    if (this.logged) {
+      let user = JSON.parse(localStorage.getItem(CURRENT_USER));
+      console.log(user);
+      return user.data.individual_id;
+    }
+  }
+
+  /**
    *  Function to populate FirstName of the logger user
    */
   public getFirstName(): string {
@@ -80,7 +91,7 @@ export class AuthenticationService {
   public getLastName(): string {
     if (this.logged) {
       let user = JSON.parse(localStorage.getItem(CURRENT_USER));
-      return user.data.lastName;
+      return user.data.last_name;
     }
     return null;
   }

@@ -41,7 +41,21 @@ export class RequestService {
     return this.http.get<any>(
       url, this.getBasicHeader()
     );
-  }  
+  }
+
+  /**
+   * Get request by id
+   * @param requestId
+   */
+  public listById(requestId:number) {
+    if (requestId) {
+      let url:string = `${environment.server}${environment.requestByIdEndPoint}`; 
+      url += `&request_id=${requestId}`;
+      return this.http.get<any>(
+        url, this.getBasicHeader()
+      );
+    }
+  }
 
   //move this upstairs than copying for all services here and there.
   private getBasicHeader() {

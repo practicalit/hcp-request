@@ -7,11 +7,14 @@ declare interface RouteInfo {
     title: string;
     icon: string;
     class: string;
+    showOnSide: boolean;
 }
 export const ROUTES: RouteInfo[] = [
-    { path: '/home', title: 'Home',  icon: 'ni-tv-2 text-primary', class: '' },
+    { path: '/home', title: 'Home',  icon: 'ni-tv-2 text-primary', class: '', showOnSide: true },
     //{ path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '' },
-    { path: '/request', title: 'Request',  icon:'ni-pin-3 text-orange', class: '' },
+    { path: '/request-detail', title: 'Request Detail',  icon:'ni-pin-3 text-orange', class: '', showOnSide: false },
+    { path: '/request', title: 'Request',  icon:'ni-pin-3 text-orange', class: '', showOnSide: true },
+
     /*{ path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
     { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '' },
     { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '' },

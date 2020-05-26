@@ -42,13 +42,12 @@
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                  <span class="input-group-text"><i class="ni ni-hat-3"> Registering as </i></span>
                 </div>
-                <select formControlName="registerAs" class="form-control" >
-                  <option value="">Registering as</option>
-                  <option value="1">Health Professional</option>
-                  <option value="2">Volunteer</option>
-                </select>
+                <div class="form-control">
+                  <input type="radio" value="1" formControlName="registerAs" ngModel> Health professtional<br />
+                  <input type="radio" value="2" formControlName="registerAs" ngModel> Volunteer
+                </div>
               </div>
             </div>
             <div class="form-group">
@@ -58,7 +57,7 @@
                 </div>
                 <input formControlName="firstName" class="form-control" placeholder="First Name" type="text">
               </div>
-            </div>            
+            </div>
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
@@ -82,7 +81,7 @@
                 </div>
                 <input formControlName="password" class="form-control" placeholder="password" type="password">
               </div>
-            </div>            
+            </div>
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
@@ -90,13 +89,13 @@
                 </div>
                 <input formControlName="phone" class="form-control" placeholder="Phone" type="text">
               </div>
-            </div>    
+            </div>
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-compass-01"></i>State</span>
                 </div>
-                <select formControlName="state" class="form-control" >
+                <select formControlName="state" class="form-control">
                   <option>Select State</option>
                   <option value="1">Addis Ababa</option>
                   <option value="2">Amhara</option>
@@ -104,13 +103,13 @@
                   <option value="4">Tigrai</option>
                 </select>
               </div>
-            </div>    
+            </div>
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-compass"></i>City</span>
                 </div>
-                <select formControlName="city" class="form-control" >
+                <select formControlName="city" class="form-control">
                   <option>Select City</option>
                   <option value="1">Gullele</option>
                   <option value="2">Piassa</option>
@@ -118,10 +117,11 @@
                   <option value="4">Bole</option>
                 </select>
               </div>
-            </div>      
-            <div [ngClass]="{'success': !registerForm.invalid, 'error': registerForm.invalid}">{{message}}</div>      
+            </div>
+            <div [ngClass]="{'success': !registerForm.invalid, 'error': registerForm.invalid}">{{message}}</div>
             <div class="text-center">
-              <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary mt-4">Create account</button>
+              <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary mt-4">Create
+                account</button>
             </div>
           </form>
         </div>

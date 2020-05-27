@@ -26,7 +26,8 @@
           <div class="form-group">
             <label for="title">Title</label>
             <span *ngIf = "(title.touched || title.dirty) && formSubmitted && title.invalid && title.errors.required"></span>
-            <input formControlName="title" type="text" class="form-control" id="title" aria-describedby="title">
+            <input formControlName="title" type="text" class="form-control" id="title" aria-describedby="minimumlenegth=20">
+            <p>atleast 20 characters or more</p>
           </div>          
           <div class="form-group">
             <label class="form-check-label" for="message">Message</label>

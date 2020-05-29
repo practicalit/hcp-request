@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   submitted: boolean;
   message: string;
-  showSpinner: boolean; loginFailed: boolean;
+  showSpinner: boolean; 
+  loginFailed = false;
   loginForm: FormGroup;
 
   ngOnInit() {
@@ -24,11 +25,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
+      
     });
   }
 
   get form() {
     return this.loginForm.controls
+    
   }
 
   ngOnDestroy() {
@@ -48,13 +51,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.authenticate(this.form.email.value,
       this.form.password.value).subscribe(user => {
         if (user.success && user.data.token) {
+          this.loginFailed = false;
           this.authService.storeToken(user);
           this.redirectToDashboard();  
-          
         } else {
           this.loginFailed = true;
           this.authService.removeToken();
-          this.message = "Invalid Username/Password";
+          this.message= "Invalid Username/Password"
           return;
         }
       });

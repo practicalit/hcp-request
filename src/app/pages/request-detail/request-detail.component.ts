@@ -19,6 +19,8 @@ export class RequestDetailComponent implements OnInit {
   request_owner_id: number;
   remove_request: boolean = false;
   logged_member_id: number;
+  show_confirm_cancel: boolean = false;
+  removal_content: string = "";//temporary removal action placeholder.
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -57,13 +59,20 @@ export class RequestDetailComponent implements OnInit {
    * like deleting the request.
    */
   memberOwnsRequest() {
-    console.log('member id' + this.logged_member_id);
-    console.log('owner id' + this.request_owner_id);
     return this.logged_member_id === this.request_owner_id
   }
 
   removeRequest() {
     this.remove_request = true;
+    this.show_confirm_cancel = true;
   }
 
+  cancelRemove() {
+    this.show_confirm_cancel = false;
+    this.removal_content = "";
+  }
+
+  confirmRemove() {
+    this.removal_content = "Removal triggered."
+  }
 }

@@ -36,7 +36,12 @@
                   </div>
                 </div>
 
-                <div *ngIf="memberOwnsRequest()"><button type="button" class="btn btn-danger" (click)="removeRequest()">Remove request</button></div>
+                <div *ngIf="memberOwnsRequest()">
+                  <button type="button" class="btn btn-danger" (click)="removeRequest()">Remove request</button>
+                  <button *ngIf="show_confirm_cancel" type="button" class="btn btn-success" (click)="cancelRemove()">Cancel</button>
+                  <button *ngIf="show_confirm_cancel" type="button" class="btn btn-danger" (click)="confirmRemove()">Confirm</button>
+                  <div *ngIf="show_confirm_cancel">{{removal_content}}</div>
+                </div>
         </div>
       </div>
     </div>

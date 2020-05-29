@@ -13,7 +13,12 @@ export class RegisterComponent implements OnInit {
 
   submitted: boolean;
   message: string;
-
+  private states: state[] = [
+    {id: 1, name: 'Addis Ababa'},
+    {id: 2, name: 'Amhara'},
+    {id: 3, name: 'Oromiya'},
+    {id: 4, name: 'Tigray'}
+    ];
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private individualService: IndividualService

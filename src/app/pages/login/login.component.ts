@@ -9,10 +9,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  authService: AuthenticationService;
   constructor(
-    private authService: AuthenticationService,
+    authService: AuthenticationService,
     private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router) {
+      this.authService = authService;
+    }
 
   submitted: boolean;
   message: string;

@@ -14,6 +14,11 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { DocComponent } from './pages/doc/doc.component';
 
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from 'src/environments/environment';
+
 
 @NgModule({
   imports: [
@@ -24,7 +29,10 @@ import { DocComponent } from './pages/doc/doc.component';
     ComponentsModule,
     NgbModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   declarations: [
     AppComponent,

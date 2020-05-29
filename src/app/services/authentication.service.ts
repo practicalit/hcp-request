@@ -3,6 +3,10 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { auth } from 'firebase/app';
+import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+
 import { environment } from '../../environments/environment';
 
 
@@ -21,7 +25,7 @@ export class AuthenticationService {
 
   tokenHelper = new JwtHelperService();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public afAuth: AngularFireAuth,) {
   }
 
   /**
@@ -120,5 +124,19 @@ export class AuthenticationService {
         'Content-Type': 'application/json'
       })
     };
+  }
+
+  FacebookAuth() {
+    return this.AuthLogin(new auth.FacebookAuthProvider());
+  } 
+
+  // Auth logic to run auth providers
+  AuthLogin(provider) {
+    return this.afAuth.auth.signInWithPopup(provider)
+    .then((result) => {
+        console.log('You have been successfully logged in!')
+    }).catch((error) => {
+        console.log(error)
+    })
   }
 }

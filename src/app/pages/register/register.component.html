@@ -94,12 +94,10 @@
                   <span class="input-group-text"><i class="ni ni-compass-01"></i>State</span>
                 </div>
                 <select formControlName="state" class="form-control" >
-                  <option>Select State</option>
-                  <option value="1">Addis Ababa</option>
-                  <option value="2">Amhara</option>
-                  <option value="3">Oromia</option>
-                  <option value="4">Tigrai</option>
-                </select>
+            <option *ngFor="let state of states" [value]="state.id">
+            {{state.name}}
+            </option>
+          </select>
               </div>
             </div>    
             <div class="form-group">

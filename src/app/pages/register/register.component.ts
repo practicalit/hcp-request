@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, Validator } from '@angular/forms';
 import { IndividualService } from 'src/app/services/individual.service';
 import { Individual } from 'src/app/models/individual.model';
+import { State } from 'src/app/models/state.model';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,12 @@ export class RegisterComponent implements OnInit {
 
   submitted: boolean;
   message: string;
-
+  private states: State[] = [
+    {id: 1, name: 'Addis Ababa'},
+    {id: 2, name: 'Amhara'},
+    {id: 3, name: 'Oromiya'},
+    {id: 4, name: 'Tigray'}
+    ];
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private individualService: IndividualService

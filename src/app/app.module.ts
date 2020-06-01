@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { DocComponent } from './pages/doc/doc.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { DocComponent } from './pages/doc/doc.component';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    DocComponent
+    DocComponent,
+    EditProfileComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

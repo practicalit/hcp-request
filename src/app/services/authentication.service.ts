@@ -3,12 +3,8 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { auth } from 'firebase/app';
-import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-
 import { environment } from '../../environments/environment';
-
+import { User } from '../models/user.model';
 
 /**
  * Authentication handler service.
@@ -25,7 +21,7 @@ export class AuthenticationService {
 
   tokenHelper = new JwtHelperService();
 
-  constructor(private http: HttpClient, public afAuth: AngularFireAuth,) {
+  constructor(private http: HttpClient) {
   }
 
   /**
@@ -38,11 +34,30 @@ export class AuthenticationService {
     return localStorage.getItem(CURRENT_USER) !== null;
   }
 
+  /**
+   * Given the email and password, authenticate the member.
+   * @param email 
+   * @param password 
+   */
   public authenticate(email: string, password: string): Observable<any> {
     //server and end point are stored in the environment config
     return this.http.post<any>(
       `${environment.server}${environment.authEndPoint}`,
       { "email": email, "password": password }, this.getBasicHeader()
+    );
+  }
+
+  /**
+   * Generic oAuth handler.
+   * @param email 
+   * @param first_name 
+   * @param last_name 
+   * @param login_method
+   */
+  public loginByOauth(user: User): Observable<any> {
+    return this.http.post<any>(
+      `${environment.server}${environment.oAuthLogin}`,
+      { "login_method":user, "email": user.email, "first_name": user.first_name, "last_name": user.last_name }, this.getBasicHeader()
     );
   }
 
@@ -79,7 +94,7 @@ export class AuthenticationService {
   }
 
   /**
-   *  Function to populate FirstName of the logger user
+   *  Method to populate FirstName of the logger user
    */
   public getFirstName(): string {
     if (this.logged) {
@@ -90,7 +105,27 @@ export class AuthenticationService {
   }
 
   /**
-   * Function to populate LastName of the logger user
+   *  Method to populate FirstName of the logger user
+   */
+  public getRole(): string {
+    if (this.logged) {
+      let user = JSON.parse(localStorage.getItem(CURRENT_USER));
+      return user.data.role;
+    }
+    return null;
+  }
+
+  public updateRole(role: string) {
+    if (this.logged) {
+      let user = JSON.parse(localStorage.getItem(CURRENT_USER));
+      user.data.role = role;
+      localStorage.setItem(CURRENT_USER, user);
+    }
+    return null;
+  }
+
+  /**
+   * Method to populate LastName of the logger user
    */
   public getLastName(): string {
     if (this.logged) {
@@ -124,19 +159,5 @@ export class AuthenticationService {
         'Content-Type': 'application/json'
       })
     };
-  }
-
-  FacebookAuth() {
-    return this.AuthLogin(new auth.FacebookAuthProvider());
-  } 
-
-  // Auth logic to run auth providers
-  AuthLogin(provider) {
-    return this.afAuth.auth.signInWithPopup(provider)
-    .then((result) => {
-        console.log('You have been successfully logged in!')
-    }).catch((error) => {
-        console.log(error)
-    })
   }
 }

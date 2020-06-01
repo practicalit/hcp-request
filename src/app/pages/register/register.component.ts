@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, Validator } from '@angular/forms';
 import { IndividualService } from 'src/app/services/individual.service';
 import { Individual } from 'src/app/models/individual.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private router: Router,
     private formBuilder: FormBuilder,
-    private individualService: IndividualService
+    private individualService: IndividualService,
+    private authService: AuthenticationService
     ) { }
 
   registerForm: FormGroup;
@@ -24,12 +26,8 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       registerAs: ['', Validators.required],
       firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
-      phone: ['', Validators.required],
-      state: ['', Validators.required],
-      city: ['', Validators.required]
     });
   }
 
@@ -49,22 +47,29 @@ export class RegisterComponent implements OnInit {
     let individual = new Individual();
     //to be consistent with database, I am forcing the underscore naming standard for models
     individual.first_name = this.form.firstName.value;
-    individual.last_name = this.form.lastName.value;
+    individual.last_name = this.form.firstName.value;
     individual.email = this.form.email.value;
     individual.password = this.form.password.value;
-    individual.phone = this.form.phone.value;
-    individual.state_id = this.form.state.value;
-    individual.city_id = this.form.city.value;
     individual.role_id = this.form.registerAs.value;
     
     this.individualService.register(individual).subscribe(
       response => {
         if (response.success) {
-          this.message = "Successfully Registered";
+          //this should be performed in one shot
+          this.authService.authenticate(individual.email, individual.password).subscribe(
+            user => {
+              this.authService.storeToken(user);
+              this.redirectToDashboard();
+            }
+          );
         } else {
           this.message = "Something goes wrong, can we try again?";
         }
       }
     );
+  }
+
+  private redirectToDashboard() {
+    this.router.navigate(['/home']);
   }
 }

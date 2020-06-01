@@ -4,6 +4,7 @@ import { Dashboard } from 'src/app/models/dashboard.model';
 import { HelpRequest } from 'src/app/models/help.request.model.';
 import { RequestService } from 'src/app/services/request.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,13 +18,20 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private requestService: RequestService,
-    private router: Router
+    private router: Router,
+    private authService: AuthenticationService
   ) { }
 
   dashboard: Dashboard;
   requests: Array<HelpRequest>;
 
   ngOnInit() {
+    //check if user has role or not.
+    let role: string = this.authService.getRole();
+    if (role == 'UNKNOWN') {
+      this.redirect('/add-role');
+    }
+
     this.dashboard = new Dashboard();
     this.dashboard.active = 100;
     this.dashboard.professionals = 236;
@@ -37,7 +45,6 @@ export class HomeComponent implements OnInit {
         } else {
           //check this again. Failure from service is only login issue?
           this.redirect('/login');
-          //console.log(response);
         }
       }
     );

@@ -18,6 +18,7 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
+import { RoleStateComponent } from './pages/role-state/role-state.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { environment } from 'src/environments/environment';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    DocComponent
+    DocComponent,
+    RoleStateComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

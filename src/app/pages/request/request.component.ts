@@ -20,9 +20,9 @@ export class RequestComponent implements OnInit {
     private requestService: RequestService) { }
     private submitting = "";
  
-   onClick(event){
-     console.log(event);
-     this.submitting = "Under Construction"
+   onClick(){
+     
+     this.submitting = 'Under Construction'
       
    }
 

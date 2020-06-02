@@ -57,6 +57,37 @@ export class RequestService {
     }
   }
 
+  /**
+   * Handling the volunteers initiative to work on the request.
+   * 
+   * @param request_id 
+   * @param volunteer_id 
+   */
+  public taskPicked(request_id: number, volunteer_id: number): Observable<any> {
+    if (request_id && volunteer_id) {
+      let url:string = `${environment.server}${environment.requestPickedEndPoint}`; 
+      return this.http.post<any>(
+        url, {request_id: request_id, individual_id: volunteer_id}, this.getBasicHeader()
+      );
+    }
+  }
+
+  /**
+   * Get all the good volunteers who are working on the given request
+   * 
+   * @param request_id 
+   * @param volunteer_id 
+   */
+  public awesomeVolunteers(request_id: number): Observable<any> {
+    if (request_id) {
+      let url:string = `${environment.server}${environment.awesomeVolunteerEndPoint}`; 
+      url += `&request_id=${request_id}`;
+      return this.http.get<any>(
+        url, this.getBasicHeader()
+      );
+    }
+  }
+
   //move this upstairs than copying for all services here and there.
   private getBasicHeader() {
     return {

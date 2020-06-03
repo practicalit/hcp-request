@@ -21,6 +21,7 @@ export class RequestDetailComponent implements OnInit {
   logged_member_id: number;
   show_confirm_cancel: boolean = false;
   removal_content: string = "";//temporary removal action placeholder.
+  request_id: number;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -32,10 +33,10 @@ export class RequestDetailComponent implements OnInit {
     this.logged_member_id = this.authService.getLoggedMemberId();
     this.activatedRoute.paramMap.subscribe(
       params => { 
-        let requestId = Number(params.get('requestId'));
-        if (requestId != null && requestId) {
+        this.request_id = Number(params.get('requestId'));
+        if (this.request_id != null && this.request_id) {
           //fetch associated data using the id fetched
-          this.requestService.listById(requestId).subscribe(
+          this.requestService.listById(this.request_id).subscribe(
             response => {
               if (response.success) {
                 this.title = response.data.title;

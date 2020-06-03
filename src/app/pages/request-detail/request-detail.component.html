@@ -42,6 +42,11 @@
                   <button *ngIf="show_confirm_cancel" type="button" class="btn btn-danger" (click)="confirmRemove()">Confirm</button>
                   <div *ngIf="show_confirm_cancel">{{removal_content}}</div>
                 </div>
+                <div class="row">
+                  <div class="col-md">
+                    <app-comments [object_id]="request_id"></app-comments>
+                  </div>
+                </div>
         </div>
       </div>
     </div>

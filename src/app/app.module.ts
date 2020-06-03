@@ -32,7 +32,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     AdminLayoutComponent,
     AuthLayoutComponent,
     DocComponent,
-    EditProfileComponent
+    EditProfileComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

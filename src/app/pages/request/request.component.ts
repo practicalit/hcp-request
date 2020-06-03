@@ -18,6 +18,13 @@ export class RequestComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private requestService: RequestService) { }
+    private submitting = "";
+ 
+   onClick(){
+     
+     this.submitting = 'Under Construction'
+      
+   }
 
   get title() {
     return this.requestForm.controls.title;
@@ -59,7 +66,7 @@ export class RequestComponent implements OnInit {
     
     this.requestService.postRequest(request).subscribe(
       response => {
-        this.success = false;
+        this.success = true;
         if (response.success) {
           this.success = true;
           this.message = "Successfully posted the request";

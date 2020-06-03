@@ -59,11 +59,11 @@ export class RequestComponent implements OnInit {
     
     this.requestService.postRequest(request).subscribe(
       response => {
-        this.success = false;
-        if (response.success) {
+        if (response === null) {
           this.success = true;
           this.message = "Successfully posted the request";
         } else {
+          this.success = false;
           this.message = "It didn't go through, please try again";
         }
       }

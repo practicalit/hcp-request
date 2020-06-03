@@ -9,9 +9,7 @@
   <div class="container-fluid mt--7">
     <div class="row">
       <div class="col">
-        <div class="card shadow border-0 p-10">
-          
-            
+        <div class="card shadow border-0 p-10" [ngClass]="{'placed': true}">
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <div id="title">{{title}}</div>
@@ -35,18 +33,42 @@
                     <div>{{date_created}}</div>
                   </div>
                 </div>
-
                 <div *ngIf="memberOwnsRequest()">
                   <button type="button" class="btn btn-danger" (click)="removeRequest()">Remove request</button>
                   <button *ngIf="show_confirm_cancel" type="button" class="btn btn-success" (click)="cancelRemove()">Cancel</button>
                   <button *ngIf="show_confirm_cancel" type="button" class="btn btn-danger" (click)="confirmRemove()">Confirm</button>
                   <div *ngIf="show_confirm_cancel">{{removal_content}}</div>
                 </div>
+                <div *ngIf="!request_already_picked">
+                  <div *ngIf="total_volunteers > 0; then thenBlock else elseBlock"></div>
+                </div>
+                <div *ngIf="request_already_picked">Thanks for picking this request</div>
                 <div class="row">
                   <div class="col-md">
                     <app-comments [object_id]="request_id"></app-comments>
                   </div>
                 </div>
+                
+                <ng-template #thenBlock>
+                  <div class="row">
+                    <div class="col-md text-right">
+                      <button  *ngIf="!request_already_picked" type="button" class="btn btn-success" (click)="taskPicked()">I Can Help Too</button>
+                    </div>
+                    <div class="col-md">
+                      {{total_volunteers}} awesome volunteers are working on this request.
+                    </div>                    
+                  </div>
+                </ng-template>
+                <ng-template #elseBlock>
+                  <div class="row">
+                    <div class="col-md text-right">
+                      <button type="button" class="btn btn-success" (click)="taskPicked()">I Can Help Too</button>
+                    </div>
+                    <div class="col-md">
+                      Be the hero by picking this 
+                    </div>                    
+                  </div>
+                </ng-template>
         </div>
       </div>
     </div>

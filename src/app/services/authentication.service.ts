@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-
+import { User } from '../models/user.model';
 
 /**
  * Authentication handler service.
@@ -34,11 +34,30 @@ export class AuthenticationService {
     return localStorage.getItem(CURRENT_USER) !== null;
   }
 
+  /**
+   * Given the email and password, authenticate the member.
+   * @param email 
+   * @param password 
+   */
   public authenticate(email: string, password: string): Observable<any> {
     //server and end point are stored in the environment config
     return this.http.post<any>(
       `${environment.server}${environment.authEndPoint}`,
       { "email": email, "password": password }, this.getBasicHeader()
+    );
+  }
+
+  /**
+   * Generic oAuth handler.
+   * @param email 
+   * @param first_name 
+   * @param last_name 
+   * @param login_method
+   */
+  public loginByOauth(user: User): Observable<any> {
+    return this.http.post<any>(
+      `${environment.server}${environment.oAuthLogin}`,
+      { "login_method":user.login_method, "email": user.email, "first_name": user.first_name, "last_name": user.last_name }, this.getBasicHeader()
     );
   }
 
@@ -69,13 +88,12 @@ export class AuthenticationService {
   public getLoggedMemberId() {
     if (this.logged) {
       let user = JSON.parse(localStorage.getItem(CURRENT_USER));
-      console.log(user);
       return user.data.individual_id;
     }
   }
 
   /**
-   *  Function to populate FirstName of the logger user
+   *  Method to populate FirstName of the logger user
    */
   public getFirstName(): string {
     if (this.logged) {
@@ -86,7 +104,27 @@ export class AuthenticationService {
   }
 
   /**
-   * Function to populate LastName of the logger user
+   *  Method to populate FirstName of the logger user
+   */
+  public getRole(): string {
+    if (this.logged) {
+      let user = JSON.parse(localStorage.getItem(CURRENT_USER));
+      return user.data.role;
+    }
+    return null;
+  }
+
+  public updateRole(role: string) {
+    if (this.logged) {
+      let user = JSON.parse(localStorage.getItem(CURRENT_USER));
+      user.data.role = role;
+      localStorage.setItem(CURRENT_USER, user);
+    }
+    return null;
+  }
+
+  /**
+   * Method to populate LastName of the logger user
    */
   public getLastName(): string {
     if (this.logged) {

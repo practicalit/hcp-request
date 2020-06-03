@@ -59,7 +59,7 @@ export class RequestComponent implements OnInit {
     
     this.requestService.postRequest(request).subscribe(
       response => {
-        if (response === null) {
+        if (response.success) {
           this.success = true;
           this.message = "Successfully posted the request";
         } else {

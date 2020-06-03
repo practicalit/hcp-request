@@ -36,6 +36,7 @@ export class RoleStateComponent implements OnInit {
     let role_id: number = this.roleForm.controls.role.value;
     this.individualService.updateRole(role_id).subscribe(
       result => {
+        console.log(result);
         if (result.success) {
           //role has been changed. Update local cache and redirect.
           let role: string = 'VOLUNTEER'; //find better way to avoid hard coding here. Create constants file.
@@ -43,7 +44,7 @@ export class RoleStateComponent implements OnInit {
             role = 'BALEMUYA';
           }
           
-          this.authService.updateRole('VOLUNTEER');
+          this.authService.updateRole(role);
           this.router.navigate(['/home']);
         }
       }

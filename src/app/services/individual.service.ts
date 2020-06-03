@@ -41,7 +41,7 @@ export class IndividualService {
     let $url = `${environment.server}${environment.individualUpdateEndPoint}`;
     let payload = {role_id: role_id, individual_id: individual_id};
     return this.http.post<any>(
-      $url, payload, this.getBasicHeader()
+      $url, payload, this.getBasicHeaderWithAuth()
       );
   }
 
@@ -49,6 +49,16 @@ export class IndividualService {
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
+      })
+    };
+  }
+
+  //move this upstairs than copying for all services here and there.
+  private getBasicHeaderWithAuth() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authentication': `Bearer ${this.authService.getToken()}`
       })
     };
   }

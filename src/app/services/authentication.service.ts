@@ -88,7 +88,6 @@ export class AuthenticationService {
   public getLoggedMemberId() {
     if (this.logged) {
       let user = JSON.parse(localStorage.getItem(CURRENT_USER));
-      console.log(user);
       return user.data.individual_id;
     }
   }

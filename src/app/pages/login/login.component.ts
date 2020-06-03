@@ -3,8 +3,8 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FormGroup, FormBuilder, Validators, ɵNgSelectMultipleOption } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { auth } from 'firebase/app';
-import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase';
 
 import { User } from '../../models/user.model';
 
@@ -69,11 +69,11 @@ export class LoginComponent implements OnInit, OnDestroy {
    */
   googleAuth() {
     this.submitted = true;
-    this.authLogin(new auth.GoogleAuthProvider());
+    this.authLogin(new firebase.auth.GoogleAuthProvider());
   }
 
   async signOut() {
-    await this.afAuth.auth.signOut();
+    await this.afAuth.signOut();
     this.router.navigate(['/']);
   }
 
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit, OnDestroy {
    */
   facebookAuth() {
     this.submitted = true;
-    this.authLogin(new auth.FacebookAuthProvider());
+    this.authLogin(new firebase.auth.FacebookAuthProvider());
   } 
 
   /**
@@ -96,9 +96,8 @@ export class LoginComponent implements OnInit, OnDestroy {
    * @param provider 
    */
   authLogin(provider) {
-    return this.afAuth.auth.signInWithPopup(provider)
+    return this.afAuth.signInWithPopup(provider)
     .then((result) => this.ngZone.run( () => {
-      console.log(result);
       if (result != null && result.additionalUserInfo) {
         this.handleOauth(result);
       }
@@ -132,7 +131,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private handleLoginResponse(user) {
-    console.log(user);
     if (user.success && user.data.token) {
       this.authService.storeToken(user);
       this.redirectToDashboard();   

@@ -14,7 +14,6 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { DocComponent } from './pages/doc/doc.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { CommentComponent } from './comment/comment.component';
 
 
 @NgModule({
@@ -34,7 +33,6 @@ import { CommentComponent } from './comment/comment.component';
     AuthLayoutComponent,
     DocComponent,
     EditProfileComponent,
-    CommentComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

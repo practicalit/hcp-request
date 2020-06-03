@@ -37,19 +37,6 @@
           </div>
           <div [ngClass]="{'success': success, 'error': !success}">{{message}}</div>
           <button [disabled]='!requestForm.valid' type="submit" class="btn btn-primary">Request</button>
-          <form>
-          <fieldset>
-            <b>comments</b>
-            <p>
-              <label></label>
-              <textarea>Your comments here</textarea>
-            </p>
-               
-              <button (click)="onClick">Submit</button>
-              {{submitting}}
-
-          </fieldset>
-        </form>
         </form>
       </div>
     </div>

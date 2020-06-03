@@ -13,6 +13,7 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RequestDetailComponent } from 'src/app/pages/request-detail/request-detail.component';
+import { CommentComponent } from 'src/app/pages/comment/comment.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -31,7 +32,8 @@ import { RequestDetailComponent } from 'src/app/pages/request-detail/request-det
     TablesComponent,
     IconsComponent,
     RequestComponent,
-    RequestDetailComponent
+    RequestDetailComponent,
+    CommentComponent
   ]
 })
 

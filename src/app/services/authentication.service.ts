@@ -57,7 +57,7 @@ export class AuthenticationService {
   public loginByOauth(user: User): Observable<any> {
     return this.http.post<any>(
       `${environment.server}${environment.oAuthLogin}`,
-      { "login_method":user, "email": user.email, "first_name": user.first_name, "last_name": user.last_name }, this.getBasicHeader()
+      { "login_method":user.login_method, "email": user.email, "first_name": user.first_name, "last_name": user.last_name }, this.getBasicHeader()
     );
   }
 

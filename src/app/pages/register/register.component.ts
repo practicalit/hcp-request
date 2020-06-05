@@ -5,6 +5,7 @@ import { IndividualService } from 'src/app/services/individual.service';
 import { Individual } from 'src/app/models/individual.model';
 import { State } from 'src/app/models/state.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Constants } from 'src/app/models/constants.model';
 
 @Component({
   selector: 'app-register',
@@ -30,7 +31,6 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      registerAs: ['', Validators.required],
       firstName: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -53,10 +53,10 @@ export class RegisterComponent implements OnInit {
     let individual = new Individual();
     //to be consistent with database, I am forcing the underscore naming standard for models
     individual.first_name = this.form.firstName.value;
-    individual.last_name = this.form.firstName.value;
+    individual.last_name = "";
     individual.email = this.form.email.value;
     individual.password = this.form.password.value;
-    individual.role_id = this.form.registerAs.value;
+    individual.role_id = Constants.ROLE_UNKNOWN;//let the member set role once logged in
     
     this.individualService.register(individual).subscribe(
       response => {

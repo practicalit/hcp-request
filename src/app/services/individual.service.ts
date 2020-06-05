@@ -23,9 +23,7 @@ export class IndividualService {
    * @param individual 
    */
   public register(individual: Individual):Observable<any> {
-    let $url = individual.role_id == 1 ? 
-      `${environment.server}${environment.balemuyaEndPoint}` : 
-      `${environment.server}${environment.volunteerEndPoint}`;
+    let $url = `${environment.server}${environment.balemuyaEndPoint}`;
 
     return this.http.post<any>(
       $url, individual, this.getBasicHeader()

@@ -121,7 +121,7 @@
             <tbody *ngFor="let request of requests">
               <tr [ngClass]="{'placed': request.status_name == 'PLACED', 'picked': request.status_name == 'PICKED'}">
                 <th scope="row">
-                  {{request.first_name}} {{request.last_name}}
+                  <a [routerLink]="['/user-profile']">{{request.first_name}} {{request.last_name}}</a>
                 </th>
                 <td>
                   <a [title]="request.title" [routerLink]="['/request-detail',request.request_id]">{{request.title}}</a>

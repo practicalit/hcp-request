@@ -129,9 +129,15 @@
                 <td>
                   {{request.name}}
                 </td>
-                <td>
-                  {{request.status_name}}
+                <td *ngIf="request.status_name == 'PICKED'; then withLink; else withoutLink">
+                  <!--Content is populated based on the if condition-->
                 </td>
+                <ng-template #withLink>
+                  <a [routerLink]="['/awesome-volunteers', request.request_id]">{{request.status_name}}</a>
+                </ng-template>
+                <ng-template #withoutLink>
+                  {{request.status_name}}
+                </ng-template>
                 <td>
                   {{request.date_created | date:'short'}}
                 </td>

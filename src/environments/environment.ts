@@ -8,6 +8,7 @@ export const environment = {
   //server:'http://localhost:8082',
   balemuyaEndPoint: '/ajax.php?action=addBalemuya',
   volunteerEndPoint: '/ajax.php?action=addVolunteer',
+  dashboardEndPoint: '/ajax.php?action=dashboard',
   individualUpdateEndPoint: '/ajax.php?action=update-individual',
   authEndPoint: '/ajax.php?action=login',
   requestEndPoint: '/ajax.php?action=request',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { RequestService } from 'src/app/services/request.service';
 import { HelpRequest } from 'src/app/models/help.request.model.';
 
@@ -34,7 +34,7 @@ export class RequestComponent implements OnInit {
   ngOnInit() {
     this.requestForm = this.formBuilder.group({
       priority: ['', Validators.required],
-      title: ['', Validators.required],
+      title: ['', [Validators.required, Validators.minLength(20)]],
       request: ['', Validators.required]
     });
   }

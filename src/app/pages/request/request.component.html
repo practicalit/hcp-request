@@ -25,14 +25,24 @@
           </div>
           <div class="form-group">
             <label for="title">Title</label>
-            <span *ngIf = "(title.touched || title.dirty) && formSubmitted && title.invalid && title.errors.required"></span>
-            <input formControlName="title" type="text" class="form-control" id="title" aria-describedby="title">
+            <div *ngIf="title.errors" class="invalid">
+              <div *ngIf="(title.touched || title.dirty) && title.invalid && title.errors.required">
+                Title is required.
+              </div>
+              <div *ngIf="(title.touched || title.dirty) && title.invalid && title.errors?.minlength">
+                Title is too short.
+              </div>
+            </div> 
+            <input formControlName="title" type="text" class="form-control" [ngClass]="{'is-invalid': title.touched && title.errors}" id="title" aria-describedby="title">
           </div>          
           <div class="form-group">
             <label class="form-check-label" for="message">Message</label>
-            <textarea formControlName="request" class="form-control" id="message" rows="6">
-            </textarea>
-            
+            <div *ngIf="request.errors" class="invalid">
+              <div *ngIf="(request.touched || request.dirty) && request.invalid && request.errors.required">
+                Message is required.
+              </div>
+            </div>
+            <textarea formControlName="request" class="form-control" [ngClass]="{'is-invalid': request.touched && request.errors}"  id="message" rows="6"></textarea>
           </div>
           <div [ngClass]="{'success': success, 'error': !success}">{{message}}</div>
           <button [disabled]='!requestForm.valid' type="submit" class="btn btn-primary">Request</button>

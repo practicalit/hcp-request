@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestService } from 'src/app/services/request.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-awesome-volunteers',
@@ -10,29 +11,32 @@ export class AwesomeVolunteersComponent implements OnInit {
   private volunteers: any[]
   private requests: any
   constructor(
-    private requestservice: RequestService
+    private requestService: RequestService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
+  //request id for which volunteers are to be picked.
+  request_id: number;
+
   ngOnInit(): void {
-    this.volunteers = []
-    this.requestservice.listRequest().subscribe(
-      response => {
-        if (response.success) {
-          this.requests = response.data;
-          if (this.requests)
-            this.requests.forEach(request => {
-              this.requestservice.awesomeVolunteers(request.request_id).subscribe(vtrs => {
-                if (vtrs.data)
-                  vtrs.data.forEach(vtr => {
-                    this.volunteers.push(vtr);
-                  });
-              })
-            });
-        } else {
-          return "list request returned failur"
+    this.volunteers = [];
+    //first get the request id that is passed from the link
+    this.activatedRoute.paramMap.subscribe(
+      params => { 
+        this.request_id = Number(params.get('requestId'));
+        if (this.request_id != null && this.request_id) {
+          //fetch associated data using the id fetched
+          this.requestService.awesomeVolunteers(this.request_id).subscribe(
+            response => {
+              if (response.success) {
+                this.volunteers = response.data;
+              }
+            }
+          );      
         }
       }
     );
+    
   }
 
 }

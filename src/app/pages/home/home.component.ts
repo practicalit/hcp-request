@@ -5,6 +5,7 @@ import { HelpRequest } from 'src/app/models/help.request.model.';
 import { RequestService } from 'src/app/services/request.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { DashboardService } from 'src/app/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,10 +20,11 @@ export class HomeComponent implements OnInit {
   constructor(
     private requestService: RequestService,
     private router: Router,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private dashboardService: DashboardService
   ) { }
 
-  dashboard: Dashboard;
+  dashboard: Dashboard = new Dashboard();
   requests: Array<HelpRequest>;
 
   ngOnInit() {
@@ -32,11 +34,16 @@ export class HomeComponent implements OnInit {
       this.redirect('/add-role');
     }
 
-    this.dashboard = new Dashboard();
-    this.dashboard.active = 100;
-    this.dashboard.professionals = 236;
-    this.dashboard.volunteers = 129;
-    this.dashboard.completed = 44;
+    this.dashboardService.report().subscribe(
+      result => {
+        if (result.success) {
+          this.dashboard.active = result.data.active_requests;
+          this.dashboard.professionals = result.data.professionals;
+          this.dashboard.volunteers = result.data.volunteers;
+          this.dashboard.completed = result.data.completed;
+        }
+      }
+    );
 
     this.requestService.listRequest().subscribe(
       response => {

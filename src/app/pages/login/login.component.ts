@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private afAuth: AngularFireAuth,
     private ngZone: NgZone) {
-      this.authService = authService;
+    this.authService = authService;
     }
 
   submitted: boolean;

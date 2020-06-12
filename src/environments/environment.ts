@@ -17,6 +17,7 @@ export const environment = {
   requestPickedEndPoint: '/ajax.php?action=request-picked',
   awesomeVolunteerEndPoint: '/ajax.php?action=awesome-volunteers',
   professionalListEndPoint: '/ajax.php?action=list-professionals',
+  volunteerListEndPoint: '/ajax.php?action=list-volunteers',
   oAuthLogin: '/ajax.php?action=oauth-login',
   firebase: {
     apiKey: "AIzaSyCWj9mkUKqWAkywvXkK0-wg8X4OSyHXhpw",

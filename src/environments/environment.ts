@@ -10,6 +10,7 @@ export const environment = {
   volunteerEndPoint: '/ajax.php?action=addVolunteer',
   dashboardEndPoint: '/ajax.php?action=dashboard',
   individualUpdateEndPoint: '/ajax.php?action=update-individual',
+  individualAddressUpdateEndPoint: '/ajax.php?action=update-individual-address',
   authEndPoint: '/ajax.php?action=login',
   requestEndPoint: '/ajax.php?action=request',
   requestListEndPoint: '/ajax.php?action=list-request',
@@ -17,6 +18,8 @@ export const environment = {
   requestPickedEndPoint: '/ajax.php?action=request-picked',
   awesomeVolunteerEndPoint: '/ajax.php?action=awesome-volunteers',
   oAuthLogin: '/ajax.php?action=oauth-login',
+  statesEndPoint: '/ajax.php?action=list-states',
+  citiesEndPoint: '/ajax.php?action=list-cities',
   firebase: {
     apiKey: "AIzaSyCWj9mkUKqWAkywvXkK0-wg8X4OSyHXhpw",
     authDomain: "login-ng-a0220.firebaseapp.com",

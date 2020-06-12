@@ -43,6 +43,20 @@ export class IndividualService {
       );
   }
 
+  /**
+   * Update the address of the member.
+   * @param state_id 
+   * @param city_id
+   */
+  public updateAddress(state_id: number, city_id: number):Observable<any> {
+    let individual_id = this.authService.getLoggedMemberId();
+    let $url = `${environment.server}${environment.individualAddressUpdateEndPoint}`;
+    let payload = {state_id: state_id, city_id: city_id, individual_id: individual_id};
+    return this.http.post<any>(
+      $url, payload, this.getBasicHeaderWithAuth()
+      );
+  }
+
   private getBasicHeader() {
     return {
       headers: new HttpHeaders({

@@ -19,8 +19,22 @@
                 <option value="2">Volunteer</option>
               </select>
             </div>
+            <div class="form-group">
+              <label for="role">State </label>
+              <select formControlName="state" class="form-control" (change)="populateCity()">
+                <option value="">Select State</option>
+                <option *ngFor="let s of states" value="{{s.state_id}}">{{s.name}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="role">City</label>
+              <select formControlName="city" class="form-control">
+                <option value="">Select City</option>
+                <option *ngFor="let c of cities" value="{{c.city_id}}">{{c.name}}</option>
+              </select>
+            </div>                        
             <div [ngClass]="{'success': success, 'error': !success}">{{message}}</div>
-            <button [disabled]='!roleForm.valid' type="submit" class="btn btn-primary">Update</button>
+            <button [disabled]='false' type="submit" class="btn btn-primary">Update</button>
           </form>
         </div>
       </div>

@@ -8,7 +8,11 @@ import { AuthenticationService } from './services/authentication.service';
   providedIn: 'root'
 })
 export class DashboardService {
+  getVolunteers() {
+    URL, this.getBasicHeader()
+  }
 
+  
   constructor(
     private http: HttpClient,
     private authService: AuthenticationService
@@ -24,7 +28,13 @@ export class DashboardService {
     return this.http.get<any>(
       url, this.getBasicHeader()
     );
+  } 
+
+  public getProfessionals():Observable<any> {
+    let url:string = `${environment.server}${environment.volunteerListEndPoint}`;
+    return this.http.get<any>(url,this.getBasicHeader());
   }
+
 
   //move this upstairs than copying for all services here and there.
   private getBasicHeader() {

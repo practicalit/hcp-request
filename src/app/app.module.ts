@@ -21,6 +21,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { RoleStateComponent } from './pages/role-state/role-state.component';
 import { AwesomeVolunteersComponent } from './pages/awesome-volunteers/awesome-volunteers.component';
+import { VolunteerallComponent } from './volunteerall/volunteerall.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { AwesomeVolunteersComponent } from './pages/awesome-volunteers/awesome-v
     EditProfileComponent,
     RoleStateComponent,
     AwesomeVolunteersComponent,
+    VolunteerallComponent,
     
    
   ],

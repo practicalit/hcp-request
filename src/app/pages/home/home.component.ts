@@ -16,7 +16,9 @@ export class HomeComponent implements OnInit {
 
   public clicked: boolean = true;
   public clicked1: boolean = false;
+  public activeView: string = "REQUEST"
 
+  
   constructor(
     private requestService: RequestService,
     private router: Router,
@@ -26,6 +28,7 @@ export class HomeComponent implements OnInit {
 
   dashboard: Dashboard = new Dashboard();
   requests: Array<HelpRequest>;
+  volunteers: Array<any>
 
   ngOnInit() {
     //check if user has role or not.
@@ -56,15 +59,6 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-
-  btnClick= function () {
-    this.router.navigateByUrl('/awesome.volunteers');
-  };
-
-
-
-
-
 
   /**
    * move this to upstairs.

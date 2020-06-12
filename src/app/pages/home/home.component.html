@@ -29,11 +29,14 @@
             <div class="card-body">
               <div class="row">
                 <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Volunteers</h5>
+                  <h5 class="card-title text-uppercase text-muted mb-0">Volunteers</h5> <br />
+                    <a [routerLink]="['/volunteerall/:individual_id']" class="card-title text-lowercase text-muted mb-0">Show all</a> <br />
                   <span class="h2 font-weight-bold mb-0">{{dashboard.volunteers}}</span>
                 </div>
-                <button type="button" class="btn btn-primary-outline pull-right" (click)="btnClick();">Show all</button>
-                <span class="h2 font-weight-bold mb-0">{{awesome.volunteers}}</span>    
+                <div class="row">
+                  <div class="col"><span class="h2 font-weight-bold mb-0">{{dashboard.volunteers}}</span> </div>
+                <div class="col"><a [routerLink]="['/volunteerall/:individual_id']" class="btn-sm btn btn-primary">Show all</a></div>
+                </div>
                 <div class="col-auto">
                   <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
                     <i class="fas fa-chart-pie"></i>

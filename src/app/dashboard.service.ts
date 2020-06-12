@@ -26,6 +26,22 @@ export class DashboardService {
     );
   }
 
+  /**
+   * Get the list of professionals
+   */
+  public getProfessionals():Observable<any> {
+    let url:string = `${environment.server}${environment.professionalListEndPoint}`;
+    return this.http.get<any>(url,this.getBasicHeader());
+  }
+
+  /**
+   * Get the list of volunteers
+   */
+  public getVolunteers():Observable<any> {
+    let url:string = `${environment.server}${environment.volunteerListEndPoint}`;
+    return this.http.get<any>(url,this.getBasicHeader());
+  }
+
   //move this upstairs than copying for all services here and there.
   private getBasicHeader() {
     return {

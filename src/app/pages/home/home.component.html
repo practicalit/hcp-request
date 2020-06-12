@@ -9,7 +9,10 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-0">Our Professionals</h5>
-                  <span class="h2 font-weight-bold mb-0">{{dashboard.professionals}}</span>
+                  <div class="row">
+                    <div class="col"><span class="h2 font-weight-bold mb-0">{{dashboard.professionals}}</span> </div>
+                  <div class="col"><a [routerLink]="['/awesome-professionals']" class="btn-sm btn btn-primary">Show all</a></div>
+                  </div>
                 </div>
                 <div class="col-auto">
                   <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -29,8 +32,11 @@
             <div class="card-body">
               <div class="row">
                 <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Volunteers</h5>
-                  <span class="h2 font-weight-bold mb-0">{{dashboard.volunteers}}</span>
+                  <h5 class="card-title text-uppercase text-muted mb-0">Our Volunteers</h5>
+                  <div class="row">
+                    <div class="col"><span class="h2 font-weight-bold mb-0">{{dashboard.volunteers}}</span> </div>
+                    <div class="col"><a [routerLink]="['/all-volunteers']" class="btn-sm btn btn-primary">Show all</a></div>
+                  </div>
                 </div>
                 <div class="col-auto">
                   <div class="icon icon-shape bg-warning text-white rounded-circle shadow">

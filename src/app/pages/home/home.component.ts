@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
 
   public clicked: boolean = true;
   public clicked1: boolean = false;
-
+  public activeView: string = "REQUEST"
   constructor(
     private requestService: RequestService,
     private router: Router,
@@ -26,9 +26,11 @@ export class HomeComponent implements OnInit {
 
   dashboard: Dashboard = new Dashboard();
   requests: Array<HelpRequest>;
+  professtionals: Array<any>
 
   ngOnInit() {
     //check if user has role or not.
+
     let role: string = this.authService.getRole();
     if (role == 'UNKNOWN') {
       this.redirect('/add-role');

@@ -22,6 +22,7 @@ import { environment } from 'src/environments/environment';
 import { RoleStateComponent } from './pages/role-state/role-state.component';
 import { AwesomeVolunteersComponent } from './pages/awesome-volunteers/awesome-volunteers.component';
 
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -44,6 +45,7 @@ import { AwesomeVolunteersComponent } from './pages/awesome-volunteers/awesome-v
     EditProfileComponent,
     RoleStateComponent,
     AwesomeVolunteersComponent,
+    
    
   ],
   providers: [],

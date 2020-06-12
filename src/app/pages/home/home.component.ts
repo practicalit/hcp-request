@@ -57,6 +57,15 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  btnClick= function () {
+    this.router.navigateByUrl('/awesome.volunteers');
+  };
+
+
+
+
+
+
   /**
    * move this to upstairs.
    * @param path 

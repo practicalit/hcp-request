@@ -98,6 +98,11 @@ export class RegisterComponent implements OnInit {
     this.authLogin(new firebase.auth.FacebookAuthProvider());
   } 
 
+  googleAuth() {
+    this.submitted = true;
+    this.authLogin(new firebase.auth.GoogleAuthProvider());
+  }
+
   /**
    * handle the login by facebook. First check if the user exists
    * if not, register the member and proceed to the home page.

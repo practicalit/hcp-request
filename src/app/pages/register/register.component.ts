@@ -7,6 +7,8 @@ import { State } from 'src/app/models/state.model';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Constants } from 'src/app/models/constants.model';
 
+import * as firebase from 'firebase';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -16,12 +18,7 @@ export class RegisterComponent implements OnInit {
 
   submitted: boolean;
   message: string;
-  private states: State[] = [
-    {id: 1, name: 'Addis Ababa'},
-    {id: 2, name: 'Amhara'},
-    {id: 3, name: 'Oromiya'},
-    {id: 4, name: 'Tigray'}
-    ];
+
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private individualService: IndividualService,
@@ -74,6 +71,26 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
+
+    /**
+   * Google oAuth handler from the view click
+   */
+  googleAuth() {
+    this.submitted = true;
+    this.authService.authLogin(new firebase.auth.GoogleAuthProvider());
+  }
+
+  async signOut() {
+    this.authService.oauthLogout();
+  }
+
+  /**
+   * Event handler for login by facebook option.
+   */
+  facebookAuth() {
+    this.submitted = true;
+    this.authService.authLogin(new firebase.auth.FacebookAuthProvider());
+  } 
 
   private redirectToDashboard() {
     this.router.navigate(['/home']);

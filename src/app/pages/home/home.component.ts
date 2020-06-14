@@ -31,32 +31,32 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     //check if user has role or not.
 
-    let role: string = this.authService.getRole();
-    if (role == 'UNKNOWN') {
+    let role: string = this.authService.getLoggedMemberProperty('role');
+    if (role == null || role == 'UNKNOWN') {
       this.redirect('/add-role');
+    } else {
+      this.dashboardService.report().subscribe(
+        result => {
+          if (result.success) {
+            this.dashboard.active = result.data.active_requests;
+            this.dashboard.professionals = result.data.professionals;
+            this.dashboard.volunteers = result.data.volunteers;
+            this.dashboard.completed = result.data.completed;
+          }
+        }
+      );
+
+      this.requestService.listRequest().subscribe(
+        response => {
+          if (response.success) {
+            this.requests = response.data;
+          } else {
+            //check this again. Failure from service is only login issue?
+            this.redirect('/login');
+          }
+        }
+      );
     }
-
-    this.dashboardService.report().subscribe(
-      result => {
-        if (result.success) {
-          this.dashboard.active = result.data.active_requests;
-          this.dashboard.professionals = result.data.professionals;
-          this.dashboard.volunteers = result.data.volunteers;
-          this.dashboard.completed = result.data.completed;
-        }
-      }
-    );
-
-    this.requestService.listRequest().subscribe(
-      response => {
-        if (response.success) {
-          this.requests = response.data;
-        } else {
-          //check this again. Failure from service is only login issue?
-          this.redirect('/login');
-        }
-      }
-    );
   }
 
   /**

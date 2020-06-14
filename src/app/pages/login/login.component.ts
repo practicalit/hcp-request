@@ -1,15 +1,9 @@
-import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { FormGroup, FormBuilder, Validators, ɵNgSelectMultipleOption } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
-
-import { User } from '../../models/user.model';
-
-const FACEBOOK_LOGIN_ID = 2;
-const GOOGLE_LOGIN_ID = 3;
 
 @Component({
   selector: 'app-login',
@@ -21,9 +15,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     authService: AuthenticationService,
     private formBuilder: FormBuilder,
-    private router: Router,
-    private afAuth: AngularFireAuth,
-    private ngZone: NgZone) {
+    private router: Router
+    ) {
       this.authService = authService;
     }
 
@@ -72,12 +65,11 @@ export class LoginComponent implements OnInit, OnDestroy {
    */
   googleAuth() {
     this.submitted = true;
-    this.authLogin(new firebase.auth.GoogleAuthProvider());
+    this.authService.authLogin(new firebase.auth.GoogleAuthProvider());
   }
 
   async signOut() {
-    await this.afAuth.signOut();
-    this.router.navigate(['/']);
+    this.authService.oauthLogout();
   }
 
   /**
@@ -85,53 +77,8 @@ export class LoginComponent implements OnInit, OnDestroy {
    */
   facebookAuth() {
     this.submitted = true;
-    this.authLogin(new firebase.auth.FacebookAuthProvider());
-  } 
-
-  /**
-   * handle the login by facebook. First check if the user exists
-   * if not, register the member and proceed to the home page.
-   * 
-   * NgZone is required here specially when external process for google
-   * and facebook is handled through promises. In that case, the application
-   * is handled outside of angular and routing won't work as expected.
-   * @more https://angular.io/api/core/NgZone
-   * @param provider 
-   */
-  authLogin(provider) {
-    return this.afAuth.signInWithPopup(provider)
-    .then((result) => this.ngZone.run( () => {
-      if (result != null && result.additionalUserInfo) {
-        this.handleOauth(result);
-      }
-    })).catch((error) => {
-        console.log(error)
-    })
-  }
-  
-  /**
-   * Any of the providers will be calling this after they got the response from the corresponding
-   * servers.
-   * @param result 
-   */
-  handleOauth(result) {
-    let user = new User();
-    user.email = result.additionalUserInfo.profile.email;
-
-    if (result.additionalUserInfo.providerId == 'google.com') {
-      user.first_name = result.additionalUserInfo.profile.given_name;
-      user.last_name = result.additionalUserInfo.profile.family_name;
-      user.login_method = GOOGLE_LOGIN_ID;
-    } else if (result.additionalUserInfo.providerId == "facebook.com") {
-      user.first_name = result.additionalUserInfo.profile.first_name;
-      user.last_name = result.additionalUserInfo.profile.last_name;
-      user.login_method = FACEBOOK_LOGIN_ID;
-    }
-    
-    this.authService.loginByOauth(user).subscribe(
-      user => this.handleLoginResponse(user)
-    );
-  }
+    this.authService.authLogin(new firebase.auth.FacebookAuthProvider());
+  }  
 
   private handleLoginResponse(user) {
     if (user.success && user.data.token) {

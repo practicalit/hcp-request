@@ -4,6 +4,7 @@ import { IndividualService } from 'src/app/services/individual.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 import { LocationService } from 'src/app/services/location.service';
+import { Individual } from 'src/app/models/individual.model';
 
 /**
  * When member uses social account like google and facebook to login
@@ -40,6 +41,9 @@ export class RoleStateComponent implements OnInit {
     this.populateState();
   }
 
+  /**
+   * Populate state
+   */
   private populateState() {
     this.locationService.getStates().subscribe(
       result => {
@@ -66,18 +70,19 @@ export class RoleStateComponent implements OnInit {
    */
   onSubmit() {
     let role_id: number = this.roleForm.controls.role.value;
-    this.individualService.updateRole(role_id).subscribe(
-      result => {
-        console.log("from the update role");
-        this.updateRole(result, role_id);
-      }
-    );
+    console.log("holla here");
     let state_id: number = this.roleForm.controls.state.value;
     let city_id: number = this.roleForm.controls.city.value;
-    this.individualService.updateAddress(state_id, city_id).subscribe(
+    let individual = new Individual();
+    individual.role_id = role_id;
+    individual.state_id = state_id;
+    individual.city_id = city_id;
+    individual.individual_id = this.authService.getLoggedMemberId();
+    this.individualService.update(individual).subscribe(
       result => {
-        console.log("from update address service")
-        console.log(result);
+        this.updateRole(result, role_id);
+        this.authService.setLoggedMemberProperty('state_id', state_id);
+        this.authService.setLoggedMemberProperty('city_id', city_id);
       }
     );
   }
@@ -91,7 +96,7 @@ export class RoleStateComponent implements OnInit {
         role = 'BALEMUYA';
       }
       
-      //this.authService.updateRole(role);
+      this.authService.setLoggedMemberProperty('role', role);
       this.router.navigate(['/home']);
     }
   }

@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 import { User } from '../models/user.model';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 /**
  * Authentication handler service.
@@ -13,6 +15,8 @@ import { User } from '../models/user.model';
  * 
  */
 const CURRENT_USER = 'currentUser';
+const FACEBOOK_LOGIN_ID = 2;
+const GOOGLE_LOGIN_ID = 3;
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +25,12 @@ export class AuthenticationService {
 
   tokenHelper = new JwtHelperService();
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    public afAuth: AngularFireAuth,
+    private ngZone: NgZone,
+    private router: Router
+    ) {
   }
 
   /**
@@ -88,6 +97,7 @@ export class AuthenticationService {
   public getLoggedMemberId() {
     if (this.logged) {
       let user = JSON.parse(localStorage.getItem(CURRENT_USER));
+      console.log("the member id is " + user.data.individual_id);
       return user.data.individual_id;
     }
   }
@@ -99,6 +109,38 @@ export class AuthenticationService {
     if (this.logged) {
       let user = JSON.parse(localStorage.getItem(CURRENT_USER));
       return user.data.first_name;
+    }
+    return null;
+  }
+
+  /**
+   * Generic method to get the property from the individual keys 
+   * like first name, last name..
+   * @param name 
+   */
+  public getLoggedMemberProperty(name: any) {
+    if (this.logged) {
+
+      let user = JSON.parse(localStorage.getItem(CURRENT_USER));    
+      if (name in user.data) {
+        return user.data[name];
+      }
+    }
+  }
+
+  /**
+   * Generic method to set the property from the individual keys 
+   * this is useful especially when update on property is happening
+   * @param name 
+   */
+  public setLoggedMemberProperty(name: any, value: any) {
+    if (this.logged) {
+      let user = JSON.parse(localStorage.getItem(CURRENT_USER));
+      if (name in user.data) {
+         console.log('this is the case');
+         user.data[name] = value;
+         localStorage.setItem(CURRENT_USER, JSON.stringify(user));
+      }
     }
     return null;
   }
@@ -147,6 +189,72 @@ export class AuthenticationService {
       return user.data.email;
     }
     return null;
+  }
+
+  /**
+   * handle the login by facebook. First check if the user exists
+   * if not, register the member and proceed to the home page.
+   * 
+   * NgZone is required here specially when external process for google
+   * and facebook is handled through promises. In that case, the application
+   * is handled outside of angular and routing won't work as expected.
+   * @more https://angular.io/api/core/NgZone
+   * @param provider 
+   */
+  authLogin(provider) {
+    this.afAuth.signInWithPopup(provider)
+    .then((result) => this.ngZone.run( () => {
+      if (result != null && result.additionalUserInfo) {
+        this.handleOauth(result);
+      }
+    })).catch((error) => {
+        console.log(error)
+    })
+  }
+
+  handleOauth(result) {
+    let user = new User();
+    user.email = result.additionalUserInfo.profile.email;
+
+    if (result.additionalUserInfo.providerId == 'google.com') {
+      user.first_name = result.additionalUserInfo.profile.given_name;
+      user.last_name = result.additionalUserInfo.profile.family_name;
+      user.login_method = GOOGLE_LOGIN_ID;
+    } else if (result.additionalUserInfo.providerId == "facebook.com") {
+      user.first_name = result.additionalUserInfo.profile.first_name;
+      user.last_name = result.additionalUserInfo.profile.last_name;
+      user.login_method = FACEBOOK_LOGIN_ID;
+    }
+    
+    this.loginByOauth(user).subscribe(
+      user => this.handleLoginResponse(user)
+    );
+  }
+
+  /**
+   * Logout implementation for oAuth logins
+   */
+  public async oauthLogout() {
+    await this.afAuth.signOut();
+    this.router.navigate(['/']);
+  }
+
+  /**
+   * Based on the response handle the redirect
+   * @param user 
+   */
+  private handleLoginResponse(user) {
+    if (user.success && user.data.token) {
+      this.storeToken(user);
+      this.redirectToDashboard();
+    } else {
+      this.removeToken();
+      return false;
+    }
+  }
+
+  private redirectToDashboard() {
+    this.router.navigate(['/home']);
   }
 
   /**

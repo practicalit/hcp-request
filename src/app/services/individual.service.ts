@@ -44,6 +44,19 @@ export class IndividualService {
   }
 
   /**
+   * Pass all the individual information and pass it over.
+   * @param individual 
+   */
+  public update(individual:Individual) {
+    individual.individual_id = this.authService.getLoggedMemberId();
+    let url = `${environment.server}${environment.individualUpdateEndPoint}`;
+
+    return this.http.post<any>(
+      url, individual, this.getBasicHeaderWithAuth()
+    );
+  }
+
+  /**
    * Update the address of the member.
    * @param state_id 
    * @param city_id

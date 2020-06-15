@@ -62,7 +62,7 @@
                 <ng-template #elseBlock>
                   <div class="row">
                     <div class="col-md text-right">
-                      <button type="button" class="btn btn-success" (click)="taskPicked()">I Can Help Too</button>
+                      <button type="button" class="btn btn-success" [disabled]="taskPicked()">I Can Help Too</button>
                     </div>
                     <div class="col-md">
                       Be the hero by picking this 

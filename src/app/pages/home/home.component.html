@@ -139,7 +139,7 @@
                   <!--Content is populated based on the if condition-->
                 </td>
                 <ng-template #withLink>
-                  <a [routerLink]="['/awesome-volunteers', request.request_id, request.title, request.first_name]">{{request.status_name}}</a>
+                  <a [routerLink]="['/awesome-volunteers', request.request_id]">{{request.status_name}}</a>
                 </ng-template>
                 <ng-template #withoutLink>
                   {{request.status_name}}

@@ -8,8 +8,11 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./awesome-volunteers.component.css']
 })
 export class AwesomeVolunteersComponent implements OnInit {
-  private volunteers: any[]
-  private requests: any
+  volunteers: any[]
+  requestor_first_name: string;
+  requestor_last_name: string;
+  request_title: string;
+
   constructor(
     private requestService: RequestService,
     private activatedRoute: ActivatedRoute
@@ -17,7 +20,7 @@ export class AwesomeVolunteersComponent implements OnInit {
 
   //request id for which volunteers are to be picked.
   request_id: number;
-  title: string;
+  
   requestedBy: string;
   ngOnInit(): void {
     this.volunteers = [];
@@ -25,13 +28,19 @@ export class AwesomeVolunteersComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(
       params => { 
         this.request_id = Number(params.get('requestId'));
-        this.title = params.get('title');
-        this.requestedBy = params.get('requestedBy');
         if (this.request_id != null && this.request_id) {
           //fetch associated data using the id fetched
           this.requestService.awesomeVolunteers(this.request_id).subscribe(
             response => {
-              if (response.success) {
+              console.log(response.data);
+              if (response.success && response.data.length > 0) {
+                /*the API returns the requestor info as 
+                 *requestor_first_name, requestor_last_name and title as title.
+                 * the first record and get the data.
+                 */
+                this.request_title = response.data[0].title;
+                this.requestor_first_name = response.data[0].requestor_first_name;
+                this.requestor_last_name = response.data[0].requestor_last_name;
                 this.volunteers = response.data;
               }
             }

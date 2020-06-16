@@ -22,7 +22,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'request',        component: RequestComponent, canActivate: [AuthGuardService] },
     { path: 'request-detail/:requestId', component: RequestDetailComponent, canActivate: [AuthGuardService] },
     { path: 'add-role', component: RoleStateComponent, canActivate: [AuthGuardService] },
-    { path: 'awesome-volunteers/:requestId', component: AwesomeVolunteersComponent, canActivate: [AuthGuardService] },
+    { path: 'awesome-volunteers/:requestId/:title/:requestedBy', component: AwesomeVolunteersComponent, canActivate: [AuthGuardService] },
     { path: 'awesome-professionals', component: AwesomeProfessionalsComponent, canActivate: [AuthGuardService] },
     { path: 'all-volunteers', component: AllVolunteersComponent, canActivate: [AuthGuardService] }
 ];

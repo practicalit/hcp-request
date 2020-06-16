@@ -12,7 +12,7 @@
       <!-- <div class="card shadow border-0"> -->
         <form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="priority">Priority required</label>
+            <label for="priority">Priority (required)</label>
             <span *ngIf="(priority.touched || priority.dirty) && formSubmitted && priority.invalid && priority.errors.required">
               Priority is required.
             </span>
@@ -24,7 +24,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="title">Title required</label>
+            <label for="title">Title (required)</label>
             <div *ngIf="title.errors" class="invalid">
               <div *ngIf="(title.touched || title.dirty) && title.invalid && title.errors.required">
                 Title is required.
@@ -36,7 +36,7 @@
             <input formControlName="title" type="text" class="form-control" [ngClass]="{'is-invalid': title.touched && title.errors}" id="title" aria-describedby="title">
           </div>          
           <div class="form-group">
-            <label class="form-check-label" for="message">Message required</label>
+            <label class="form-check-label" for="message">Message (required)</label>
             <div *ngIf="request.errors" class="invalid">
               <div *ngIf="(request.touched || request.dirty) && request.invalid && request.errors.required">
                 Message is required.

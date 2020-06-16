@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommentRequest } from '../../models/help.request.model.';
+import { RequestService } from '../../services/request.service';
 
 @Component({
   selector: 'app-comments',
@@ -14,15 +17,38 @@ export class CommentComponent implements OnInit {
    */
   @Input() object_id: number;
   message: string;
+  commentForm: FormGroup;
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private requestService: RequestService
+    ) { }
 
   ngOnInit(): void {
-    console.log(this.object_id)
+    this.commentForm = this.formBuilder.group({
+      comment: ['', Validators.required]
+    });
   }
 
-  public handleSubmit() {
-    this.message = "Submitting in progress";
+  onSubmit() {
+    if (this.commentForm.invalid) {
+      return;
+    }
+
+    let request: CommentRequest = {
+      request_id: this.object_id,
+      comment: this.commentForm.controls.comment.value
+    };
+    
+    this.requestService.postComment(request).subscribe(
+      response => {
+        if (response) {
+          this.message = "Successfully posted the comment";
+        } else {
+          this.message = "It didn't go through, please try again";
+        }
+      }
+    );
   }
 
 }

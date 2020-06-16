@@ -16,7 +16,7 @@ export class HelpRequest {
     }
 }
 
-export interface CommentRequest {
+export class CommentRequest {
     comment: string;
     request_id: number;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommentRequest } from '../../models/help.request.model.';
+import { CommentRequest } from '../../models/comment.model';
 import { RequestService } from '../../services/request.service';
 
 @Component({

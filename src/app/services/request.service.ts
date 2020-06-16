@@ -3,7 +3,8 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
-import { HelpRequest, CommentRequest } from '../models/help.request.model.';
+import { HelpRequest } from '../models/help.request.model.';
+import { CommentRequest } from '../models/comment.model';
 
 /**
  * @author Kaleb W. <info@thepracticalit.com>

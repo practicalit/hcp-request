@@ -1,8 +1,8 @@
-<form>
+<form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="comment">Comment / Questions</label>
-      <textarea rows="6" class="form-control" id="comment"></textarea>
+      <textarea formControlName="comment" rows="6" class="form-control" id="comment"></textarea>
     </div>
-    <button type="submit" (click)="handleSubmit()" class="btn btn-primary">Submit</button>
+    <button  [disabled]='!commentForm.valid' type="submit" class="btn btn-primary">Submit</button>
     <div><!-- just placeholder till the main implementation --> {{message}}</div>
   </form>

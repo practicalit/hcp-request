@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthenticationService } from './authentication.service';
-import { HelpRequest } from '../models/help.request.model.';
+import { HelpRequest, CommentRequest } from '../models/help.request.model.';
 
 /**
  * @author Kaleb W. <info@thepracticalit.com>
@@ -25,6 +25,15 @@ export class RequestService {
   public postRequest(request: HelpRequest):Observable<any> {
     
     let url:string = `${environment.server}${environment.requestEndPoint}`; 
+
+    return this.http.post<any>(
+      url, request, this.getBasicHeader()
+      );
+  }
+
+  public postComment(request: CommentRequest):Observable<any> {
+   
+    let url:string = `${environment.server}${environment.addCommentEndPoint}`; 
 
     return this.http.post<any>(
       url, request, this.getBasicHeader()

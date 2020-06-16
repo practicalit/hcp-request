@@ -15,3 +15,8 @@ export class HelpRequest {
         return "Low"
     }
 }
+
+export interface CommentRequest {
+    comment: string;
+    request_id: number;
+}

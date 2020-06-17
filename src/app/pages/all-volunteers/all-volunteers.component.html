@@ -16,7 +16,7 @@
                 <tr>
                   <th scope="col">FFFFirst Name</th>
                   <th scope="col">Last Name</th>
-                  <th scope="col">email</th>
+                  <th scope="col">email</th>  
                 </tr>
               </thead>
               <tbody *ngFor="let volunteer of volunteers">
@@ -29,6 +29,9 @@
                   </td>
                   <td>
                     <a>{{volunteer.email}}</a>
+                  </td>
+                  <td>
+            <button id="Deactivate" type="button" class="btn-sm btn btn-primary">Deactivate</button> 
                   </td>
                 </tr>
               </tbody>

@@ -17,6 +17,7 @@
                   <th scope="col">First Name</th>
                   <th scope="col">Last Name</th>
                   <th scope="col">email</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody *ngFor="let professional of professionals">
@@ -29,6 +30,13 @@
                   </td>
                   <td>
                     <a>{{professional.email}}</a>
+
+                  </td>
+                  <td>
+                    {{professional.Action}}
+                  </td>
+                  <td>
+                    <button id="Deactivate" type="button" class="btn-sm btn-primary">Deactivate</button>
                   </td>
                 </tr>
               </tbody>

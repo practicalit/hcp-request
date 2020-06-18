@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RequestService } from 'src/app/services/request.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-request-detail',
@@ -25,11 +26,18 @@ export class RequestDetailComponent implements OnInit {
   total_volunteers: number;
   //this is to show if the current volunteer has picked the request.
   request_already_picked = false;
+  editRequestForm: FormGroup;
+  formVisibility = {
+    title: false,
+    message: false,
+    priority: false
+  }
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private requestService: RequestService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +52,11 @@ export class RequestDetailComponent implements OnInit {
         }
       }
     );
+    
+  }
+
+  updateFormVisibility (element) {
+    this.formVisibility[element] = true;
   }
 
   /**
@@ -118,4 +131,7 @@ export class RequestDetailComponent implements OnInit {
     );
   }
 
+  onSubmit(){
+
+  }
 }

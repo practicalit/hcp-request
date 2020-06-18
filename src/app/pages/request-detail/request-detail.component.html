@@ -11,24 +11,33 @@
       <div class="col">
         <div class="card shadow border-0 p-10" [ngClass]="{'placed': true}">
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <div id="title">{{title}}</div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputAddress">Message</label>
-                  <div>{{message}}</div>
+                    <div class="form-group col-md-20">                      
+                      <div id="title" (click)="updateFormVisibility('title')"><h1>Title(required) </h1></div>
+                      <span class="glyphicon">&#x270f;</span>
+                      <div id="title" *ngIf="!formVisibility.title">{{title}}</div>                      
+                      <input *ngIf="formVisibility.title" [(ngModel)]="title" type="text" id="title" aria-describedby="title">
+                    </div>
+                    <div class="form-row -2"></div>
+                    <div class="form-group col col-md-20">
+                      <label for="inputAddress" (click)="updateFormVisibility('message')"><h1>Message(required)</h1></label>
+                      <div for="inputAddress" *ngIf="!formVisibility.message">{{message}}</div>
+                      <span class="glyphicon">&#x270f;</span>
+                      <input *ngIf="formVisibility.message" [(ngModel)]="message" type="text" id="message" aria-describedby="message">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <div for="inputState" (click)="updateFormVisibility('priority')"><h1>Priority(required)</h1></div>
+                      <span class="glyphicon">&#x270f;</span>
+                      <div for="inputState" *ngIf="!formVisibility.priority">{{priority}}</div>
+                      <input *ngIf="formVisibility.priority" [(ngModel)]="priority" type="text" id="priority" aria-describedby="priority">
+                    </div>
+                   
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-4">
                     <label for="inputCity">By</label>
                     <div>{{first_name}} {{last_name}}</div>
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="inputState">Priority</label>
-                    <div>{{priority}}</div>
-                  </div>
-                  <div class="form-group col-md-2">
                     <label for="inputZip">Posted On</label>
                     <div>{{date_created}}</div>
                   </div>

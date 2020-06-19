@@ -46,6 +46,15 @@ export class RequestService {
    * 
    * @param list of requests
    */
+  public getComments(request_id: number):Observable<any> {
+    if (request_id) {
+    let url:string = `${environment.server}${environment.commentsListEndPoint}`; 
+    url += `&request_id=${request_id}`;
+    return this.http.get<any>(
+      url, this.getBasicHeader()
+    );
+    }
+  }
   public listRequest():Observable<any> {
     let url:string = `${environment.server}${environment.requestListEndPoint}`; 
     return this.http.get<any>(

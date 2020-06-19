@@ -5,5 +5,19 @@
     </div>
     <button  [disabled]='!commentForm.valid' type="submit" class="btn btn-primary">Submit</button>
     <div>{{message}}</div>
-    <div>you Commented: {{comments.comment}}</div>
   </form>
+
+  <div *ngIf="comments.length > 0" class='container'>
+    <div *ngFor="let comment of comments" class="media comment-box">
+           <div class="media-left">
+               <a href="#">
+                   <img class="img-responsive user-photo" src="../assets/img/theme/profile.png">
+               </a>
+           </div>
+           <div class="media-body">
+               <h4 class="media-heading">{{comment.first_name}} {{comment.last_name}}</h4>
+               <p>{{comment.comment}}</p>
+             
+           </div>
+       </div>
+  </div>

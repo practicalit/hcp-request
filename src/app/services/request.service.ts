@@ -46,7 +46,7 @@ export class RequestService {
    * 
    * @param list of requests
    */
-  public getcomment(request_id: number):Observable<any> {
+  public getComments(request_id: number):Observable<any> {
     if (request_id) {
     let url:string = `${environment.server}${environment.commentsListEndPoint}`; 
     url += `&request_id=${request_id}`;

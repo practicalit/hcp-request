@@ -34,7 +34,7 @@ export class CommentComponent implements OnInit {
       params => {
         this.request_id = Number(params.get('requestId'));
         if (this.request_id != null && this.request_id) {
-          this.requestService.getcomment(this.request_id).subscribe(response => {
+          this.requestService.getComments(this.request_id).subscribe(response => {
             if (response.success) {
               this.comments = response.data;
             }
@@ -43,31 +43,28 @@ export class CommentComponent implements OnInit {
         }
       }
     );
-  
-  this.commentForm = this.formBuilder.group({
-    comment: ['', Validators.required]
-  });
-}
-onSubmit() {
-  if (this.commentForm.invalid) {
-    return;
+
+    this.commentForm = this.formBuilder.group({
+      comment: ['', Validators.required]
+    });
   }
-
-  let request: CommentRequest = {
-    request_id: this.object_id,
-    comment: this.commentForm.controls.comment.value
-  };
-  this.requestService.postComment(request).subscribe(
-    response => {
-      if (response) {
-        this.message = "Successfully posted the comment";
-      } else {
-        this.message = "It didn't go through, please try again";
-      }
+  onSubmit() {
+    if (this.commentForm.invalid) {
+      return;
     }
-  );
+
+    let request: CommentRequest = {
+      request_id: this.object_id,
+      comment: this.commentForm.controls.comment.value
+    };
+    this.requestService.postComment(request).subscribe(
+      response => {
+        if (response) {
+          this.message = "Successfully posted the comment";
+        } else {
+          this.message = "It didn't go through, please try again";
+        }
+      }
+    );
+  }
 }
-}
-
-
-

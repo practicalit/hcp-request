@@ -57,7 +57,10 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-0">Active Requests</h5>
-                  <span class="h2 font-weight-bold mb-0">{{dashboard.active}}</span>
+                  <div class="row">
+                  <div class="col"><span class="h2 font-weight-bold mb-0">{{dashboard.active}}</span> </div>
+                  <div class="col"><a [routerLink]="['/all-active-requests']" class="btn-sm btn btn-primary">Show all</a></div>
+                  </div>
                 </div>
                 <div class="col-auto">
                   <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -78,7 +81,10 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-0">Completed</h5>
-                  <span class="h2 font-weight-bold mb-0">{{dashboard.completed}}</span>
+                  <div class="row">
+                  <div class="col"><span class="h2 font-weight-bold mb-0">{{dashboard.completed}}</span> </div>
+                  <div class="col"><a [routerLink]="['/all-completed']" class="btn-sm btn btn-primary">Show all</a></div>
+                  </div>
                 </div>
                 <div class="col-auto">
                   <div class="icon icon-shape bg-info text-white rounded-circle shadow">

@@ -22,6 +22,8 @@ export class RoleStateComponent implements OnInit {
   states = [];
   cities = [];
   role_id: number;
+  success: boolean = false;
+  message: string;
 
   constructor(
     private formBuilder: FormBuilder,

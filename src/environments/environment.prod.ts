@@ -12,6 +12,7 @@ export const environment = {
   requestByIdEndPoint: '/ajax.php?action=request-by-id',
   requestPickedEndPoint: '/ajax.php?action=request-picked',
   addCommentEndPoint: '/ajax.php?action=add-comment',
+  commentsListEndPoint: '/ajax.php?action=list-comments&request_id',
   awesomeVolunteerEndPoint: '/ajax.php?action=awesome-volunteers',
   professionalListEndPoint: '/ajax.php?action=list-professionals',
   volunteerListEndPoint: '/ajax.php?action=list-volunteers',
@@ -28,3 +29,5 @@ export const environment = {
     appId: "1:620412013881:web:1bb10969de99cacc90ece8"
   }
 };
+
+

@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { RequestService } from 'src/app/services/request.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 @Component({
   selector: 'app-request-detail',
   templateUrl: './request-detail.component.html',
@@ -25,13 +24,9 @@ export class RequestDetailComponent implements OnInit {
   request_id: number;
   total_volunteers: number;
   //this is to show if the current volunteer has picked the request.
-  request_already_picked = false;
-  editRequestForm: FormGroup;
-  formVisibility = {
-    title: false,
-    message: false,
-    priority: false
-  }
+  request_already_picked:boolean=false;
+  editable:boolean = false;
+  editForm: FormGroup;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -55,9 +50,7 @@ export class RequestDetailComponent implements OnInit {
     
   }
 
-  updateFormVisibility (element) {
-    this.formVisibility[element] = true;
-  }
+  
 
   /**
    * Event handler to respond when the volunteer is picking the task.
@@ -95,6 +88,36 @@ export class RequestDetailComponent implements OnInit {
   confirmRemove() {
     this.removal_content = "Removal triggered."
   }
+   /**
+   * Switch the element to the editable component like text box or textarea
+   */
+  switchEditable() {
+    //the form shall be editable only for the owner of the request.
+    if (this.memberOwnsRequest()) {
+      this.editable = true;
+      this.instantiateForm();
+    }
+  }
+
+  /**
+   * If the form is in the editable form, this handles the updated form
+   */
+  editRequest() {
+    this.editForm = this.formBuilder.group({
+      priority: ['', Validators.required],
+      title: ['', [Validators.required, Validators.minLength(20)]],
+      request: ['', Validators.required]
+    });
+  }
+
+  /**
+   * Prepare the form if it needed to be updated.
+   */
+  instantiateForm() {
+
+  }
+
+
   /**
    * get the volunteers associated with the request.
    */
@@ -103,7 +126,7 @@ export class RequestDetailComponent implements OnInit {
       response => {
         if (response.success) {
           this.total_volunteers = response.data.length;
-          const volunteer_picked_request = volunteer => volunteer.individual_id === this.logged_member_id;
+          const volunteer_picked_request = (volunteer: { individual_id: number; }) => volunteer.individual_id === this.logged_member_id;
           if (Array.isArray(response.data)) {
             this.request_already_picked = response.data.some(volunteer_picked_request);
           }
@@ -131,7 +154,7 @@ export class RequestDetailComponent implements OnInit {
     );
   }
 
-  onSubmit(){
+ 
 
   }
-}
+

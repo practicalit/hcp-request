@@ -6,13 +6,13 @@ import { IconsComponent } from '../../pages/icons/icons.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { RequestComponent } from '../../pages/request/request.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
+import { SettingComponent } from '../../pages/setting/setting.component';
 import { RequestDetailComponent } from 'src/app/pages/request-detail/request-detail.component';
 import { EditProfileComponent } from 'src/app/edit-profile/edit-profile.component';
 import { RoleStateComponent } from 'src/app/pages/role-state/role-state.component';
 import { AwesomeVolunteersComponent } from 'src/app/pages/awesome-volunteers/awesome-volunteers.component';
 import { AwesomeProfessionalsComponent } from 'src/app/pages/awesome-professionals/awesome-professionals.component';
 import { AllVolunteersComponent } from 'src/app/pages/all-volunteers/all-volunteers.component';
-
 export const AdminLayoutRoutes: Routes = [
     { path: 'home',           component: HomeComponent, canActivate: [AuthGuardService]  },
     { path: 'user-profile',   component: UserProfileComponent },
@@ -24,5 +24,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'add-role', component: RoleStateComponent, canActivate: [AuthGuardService] },
     { path: 'awesome-volunteers/:requestId', component: AwesomeVolunteersComponent, canActivate: [AuthGuardService] },
     { path: 'awesome-professionals', component: AwesomeProfessionalsComponent, canActivate: [AuthGuardService] },
-    { path: 'all-volunteers', component: AllVolunteersComponent, canActivate: [AuthGuardService] }
+    { path: 'all-volunteers', component: AllVolunteersComponent, canActivate: [AuthGuardService] },
+    { path: 'setting', component: SettingComponent, canActivate: [AuthGuardService] }
 ];

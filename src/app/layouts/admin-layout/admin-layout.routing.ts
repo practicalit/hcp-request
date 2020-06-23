@@ -6,6 +6,7 @@ import { IconsComponent } from '../../pages/icons/icons.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { RequestComponent } from '../../pages/request/request.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
+import { SettingComponent } from '../../pages/setting/setting.component';
 import { RequestDetailComponent } from 'src/app/pages/request-detail/request-detail.component';
 import { EditProfileComponent } from 'src/app/edit-profile/edit-profile.component';
 import { RoleStateComponent } from 'src/app/pages/role-state/role-state.component';
@@ -26,4 +27,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'awesome-professionals', component: AwesomeProfessionalsComponent, canActivate: [AuthGuardService] },
     { path: 'all-volunteers', component: AllVolunteersComponent, canActivate: [AuthGuardService] },
     { path: 'comment/:request_id', component: CommentComponent, canActivate: [AuthGuardService] },
+    { path: 'setting', component: SettingComponent, canActivate: [AuthGuardService] }
 ];

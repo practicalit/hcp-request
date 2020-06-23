@@ -23,6 +23,7 @@ import { RoleStateComponent } from './pages/role-state/role-state.component';
 import { AwesomeVolunteersComponent } from './pages/awesome-volunteers/awesome-volunteers.component';
 import { AwesomeProfessionalsComponent } from './pages/awesome-professionals/awesome-professionals.component';
 import { AllVolunteersComponent } from './pages/all-volunteers/all-volunteers.component';
+import { SettingComponent } from './pages/setting/setting.component';
 
 @NgModule({
   imports: [
@@ -48,6 +49,7 @@ import { AllVolunteersComponent } from './pages/all-volunteers/all-volunteers.co
     AwesomeVolunteersComponent,
     AwesomeProfessionalsComponent,
     AllVolunteersComponent,
+    SettingComponent,
    
   ],
   providers: [],

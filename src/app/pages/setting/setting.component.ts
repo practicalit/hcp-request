@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -9,14 +10,35 @@ import { Router } from '@angular/router';
 })
 export class SettingComponent implements OnInit {
 
-  public check1: boolean = true;
-  public check2: boolean = true;
+  allowEmail: boolean = false;
+  allowSMS: boolean = false;
+
+  settingForm: FormGroup;
 
   constructor(
-    private router: Router
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
+    this.settingForm = this.formBuilder.group({
+      getEmails: [''],
+      getSMSs: [''],
+      emailPerDay: [''],
+      smsPerDay: [''],
+      emailPerWeek: [''],
+      smsPerWeek: ['']
+    });
   }
 
+  onSubmit() {
+
+  }
+
+  handleINeedEmail() {
+    this.allowEmail = this.settingForm.controls.getEmails.value;
+  }
+
+  handleINeedSMS() {
+    this.allowSMS = this.settingForm.controls.getSMSs.value;
+  }
 }

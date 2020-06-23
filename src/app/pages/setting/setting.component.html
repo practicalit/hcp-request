@@ -1,340 +1,43 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
-    <div class="container-fluid">
-      <div class="header-body">
-        <!-- Card stats -->
-        <h1 class="display-2 text-white">Hello</h1>
-        <p class="text-white mt-0 mb-5">This is your profile setting page.</p>
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <h1 class="display-2 text-white">Hello</h1>
+      <p class="text-white mt-0 mb-5">This is your profile setting page.</p>
+    </div>
+  </div>
+</div>
+<form [formGroup]="settingForm" (ngSubmit)="onSubmit()">
+  <div class="container">
+    <div class="form-group form-check">
+      <input formControlName="getEmails" (change)="handleINeedEmail()" type="checkbox" class="form-check-input">
+      <label class="form-check-label" for="get_email">I want to get email notification</label>
+    </div>
+    <div *ngIf="allowEmail">
+      <div class="form-group">
+        <label for="emails_per_day">Emails Per day</label>
+        <input formControlName="emailPerDay" type="text" class="form-control" id="emails_per_day">
+      </div>
+      <div class="form-group">
+        <label for="emails_per_week">Emails Per week</label>
+        <input formControlName="emailPerWeek" type="text" class="form-control" id="emails_per_week">
       </div>
     </div>
-  </div>         
-        <form>
-         <div ng-show="receiveemail" class="form-check">
-              <input type="checkbox" class="form-check-input" id="Check1">
-              <label class="form-check-label" for="Check1">Receive email</label> <br />
-            </div> <br />
-            <div ng-show="receivetext" class="form-check">
-                <input type="checkbox" class="form-check-input" id="check2">
-                <label class="form-check-label" for="Check2">Receive text</label>
-            </div> <br />
-         </form>     
 
-            <form action="//www.html.am/html-codes/textboxes/submitted.cfm">
-                <textarea name="myTextBox" cols="50" rows="5">
-                 How many emails per day...
-                </textarea>
-                <br />
-                <input type="Submit" class="btn-sm btn btn-success" />
-                 <br />
-                 <br />
-
-               <form action="//www.html.am/html-codes/textboxes/submitted.cfm">
-                    <textarea name="myTextBox" cols="50" rows="5">
-                     How many emails per week...
-                    </textarea>
-                    <br />
-                    <input type="Submit" class="btn-sm btn btn-success" />
-                    <br />
-                    <br />
-
-                    <form action="//www.html.am/html-codes/textboxes/submitted.cfm">
-                        <textarea name="myTextBox" cols="50" rows="5">
-                         How many texts per day...
-                        </textarea>
-                        <br />
-                        <input type="Submit" class="btn-sm btn btn-success" />
-                        <br />
-                        <br />
-                  
-                        <form action="//www.html.am/html-codes/textboxes/submitted.cfm">
-                            <textarea name="myTextBox" cols="50" rows="5">
-                             How many texts per week...
-                            </textarea>
-                            <br />
-                            <input type="Submit" class="btn-sm btn btn-success" />
-
-            </form>
-          
-                 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <div class="form-group form-check">
+      <input formControlName="getSMSs" (change)="handleINeedSMS()" type="checkbox" class="form-check-input">
+      <label class="form-check-label" for="get_email">I want to get SMS notification</label>
+    </div>
+    <div *ngIf="allowSMS">
+      <div class="form-group">
+        <label for="sms_per_day">SMS Per day</label>
+        <input formControlName="smsPerDay" type="text" class="form-control" id="sms_per_day">
+      </div>
+      <div class="form-group">
+        <label for="sms_per_week">SMS Per week</label>
+        <input formControlName="smsPerWeek" type="text" class="form-control" id="sms_per_week">
+      </div>
+    </div>
+    <button *ngIf="allowSMS || allowEmail" type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from 'src/app/dashboard.service';
+import { IndividualService } from 'src/app/services/individual.service';
 
 @Component({
   selector: 'app-awesome-professionals',
@@ -10,13 +11,23 @@ export class AwesomeProfessionalsComponent implements OnInit {
   professionals: any[];
 
   constructor(
-    private dashboardService: DashboardService) {
+    private dashboardService: DashboardService,
+    private individualService: IndividualService) {
   }
 
   ngOnInit(): void {
     this.dashboardService.getProfessionals().subscribe(response => {
       if (response.success) {
+        debugger;
         this.professionals = response.data;
+      } 
+    })
+  }
+
+  deactivate(professional) {
+    this.individualService.updateStatus(professional.individual_id, 0).subscribe(response => {
+      if (response.success) {
+        alert('success');
       } 
     })
   }

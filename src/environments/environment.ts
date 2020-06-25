@@ -20,6 +20,7 @@ export const environment = {
   commentsListEndPoint: '/ajax.php?action=list-comments&request_id',
   awesomeVolunteerEndPoint: '/ajax.php?action=awesome-volunteers',
   professionalListEndPoint: '/ajax.php?action=list-professionals',
+  changeProfessionalStatus:'/ajax.php?action=change-active-status',
   volunteerListEndPoint: '/ajax.php?action=list-volunteers',
   oAuthLogin: '/ajax.php?action=oauth-login',
   statesEndPoint: '/ajax.php?action=list-states',

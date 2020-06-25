@@ -69,6 +69,21 @@ export class IndividualService {
       $url, payload, this.getBasicHeaderWithAuth()
       );
   }
+  
+  /**
+   * Activate or deactive a professional.
+   * 
+   * @param individual_id 
+   * @param status 
+   */
+  public updateStatus(id: string, status: number): Observable<any> {
+    if (id != null && status != null) {
+      let url:string = `${environment.server}${environment.changeProfessionalStatus}`;
+      return this.http.post<any>(
+        url, {individual_id: id, active: status}, this.getBasicHeader()
+      );
+    }
+  }
 
   private getBasicHeader() {
     return {

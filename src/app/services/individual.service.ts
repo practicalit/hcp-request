@@ -42,7 +42,14 @@ export class IndividualService {
       $url, payload, this.getBasicHeaderWithAuth()
       );
   }
-
+  public DeactivatVolunteer(payload: any):Observable<any> {
+    if (payload) {
+    let url:string = `${environment.server}${environment.deactivatVolunteerEndPoint}`; 
+    return this.http.post<any>(
+      url, payload, this.getBasicHeaderWithAuth()
+    );
+    }
+  }
   /**
    * Pass all the individual information and pass it over.
    * @param individual 

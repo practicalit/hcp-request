@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment'; 
+import { environment } from '../../environments/environment';
 import { Individual } from '../models/individual.model';
 import { AuthenticationService } from './authentication.service';
 
@@ -22,39 +22,49 @@ export class IndividualService {
    * Register new Professional or Volunteer
    * @param individual 
    */
-  public register(individual: Individual):Observable<any> {
+  public register(individual: Individual): Observable<any> {
     let $url = `${environment.server}${environment.balemuyaEndPoint}`;
 
     return this.http.post<any>(
       $url, individual, this.getBasicHeader()
-      );
+    );
   }
 
   /**
    * Update the role of the member.
    * @param role_id 
    */
-  public updateRole(role_id: number):Observable<any> {
+  public updateRole(role_id: number): Observable<any> {
     let individual_id = this.authService.getLoggedMemberId();
     let $url = `${environment.server}${environment.individualUpdateEndPoint}`;
-    let payload = {role_id: role_id, individual_id: individual_id};
+    let payload = { role_id: role_id, individual_id: individual_id };
     return this.http.post<any>(
       $url, payload, this.getBasicHeaderWithAuth()
-      );
-  }
-  public DeactivatVolunteer(payload: any):Observable<any> {
-    if (payload) {
-    let url:string = `${environment.server}${environment.deactivatVolunteerEndPoint}`; 
-    return this.http.post<any>(
-      url, payload, this.getBasicHeaderWithAuth()
     );
+  }
+
+  /**
+   * Given the individual id and active status - like 0 or 1
+   * change the active status
+   * @param individual_id
+   * @param status - accepts either 1(active) or 0(not active)
+   */
+  public changeStatus(individual_id: number, status: number): Observable<any> {
+    if (individual_id != null && individual_id > 0 &&
+      status != null && (status == 1 || status == 0)) {
+      let payload = { individual_id: individual_id, status: status }
+      let url: string = `${environment.server}${environment.deactivatVolunteerEndPoint}`;
+      return this.http.post<any>(
+        url, payload, this.getBasicHeaderWithAuth()
+      );
     }
   }
+  
   /**
    * Pass all the individual information and pass it over.
    * @param individual 
    */
-  public update(individual:Individual) {
+  public update(individual: Individual) {
     individual.individual_id = this.authService.getLoggedMemberId();
     let url = `${environment.server}${environment.individualUpdateEndPoint}`;
 
@@ -68,13 +78,13 @@ export class IndividualService {
    * @param state_id 
    * @param city_id
    */
-  public updateAddress(state_id: number, city_id: number):Observable<any> {
+  public updateAddress(state_id: number, city_id: number): Observable<any> {
     let individual_id = this.authService.getLoggedMemberId();
     let $url = `${environment.server}${environment.individualAddressUpdateEndPoint}`;
-    let payload = {state_id: state_id, city_id: city_id, individual_id: individual_id};
+    let payload = { state_id: state_id, city_id: city_id, individual_id: individual_id };
     return this.http.post<any>(
       $url, payload, this.getBasicHeaderWithAuth()
-      );
+    );
   }
 
   private getBasicHeader() {

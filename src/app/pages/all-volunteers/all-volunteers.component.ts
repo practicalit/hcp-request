@@ -11,36 +11,39 @@ import { IndividualService } from 'src/app/services/individual.service';
 export class AllVolunteersComponent implements OnInit {
 
   volunteers: any[];
-  massage:string;
+  massage: string;
   submitted: boolean;
-  payload: any;
   volunteer_id: number;
   constructor(
     private dashboardService: DashboardService,
     private individualService: IndividualService,
-    ) {
+  ) {
   }
 
   ngOnInit(): void {
     this.dashboardService.getVolunteers().subscribe(response => {
       if (response.success) {
         this.volunteers = response.data;
-      } 
+      }
     })
   }
-  public deactivateIndividual(individual_id: string) {
-    this.payload = {
-      individual_id: individual_id, 
-      active: 0
-    }
-    this.individualService.DeactivatVolunteer(this.payload).subscribe(response => {
-      if (response.success) {
-      this.volunteers = this.volunteers.filter(v => v.volunteer_id != individual_id)
-        this.massage = "succesfully Deactivated";
-      } else {
-        this.massage = "Not Deactivated, please try again"
 
+  /**
+   * Handler for the status change button
+   * @todo this method shall toggle between activate and deactivate based on the 
+   * current active value of the individual. So if the individual is active, it sets it 
+   * to deactive and vice versa.
+   * 
+   * @param individual_id - the individual id whose status is to be changed
+   * @param event - the button that is clicked - needed to change its label
+   */
+  public changeStatus(individual_id: number, event: any) {
+    this.individualService.changeStatus(individual_id, 0).subscribe(response => {
+      console.log(response);
+      if (response.success) {
+        //if changing the state happened correctly, then switch the text to 'activate'
+        event.target.innerHTML = 'Activate';
       }
-  })
+    })
   }
 };

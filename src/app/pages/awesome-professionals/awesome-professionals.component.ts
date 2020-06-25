@@ -24,8 +24,8 @@ export class AwesomeProfessionalsComponent implements OnInit {
     })
   }
 
-  deactivate(professional) {
-    this.individualService.updateStatus(professional.individual_id, 0).subscribe(response => {
+  Active(professional) {
+    this.individualService.updateStatus(professional.individual_id, 1).subscribe(response => {
       if (response.success) {
         alert('success');
       } 

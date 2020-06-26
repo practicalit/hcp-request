@@ -31,7 +31,9 @@ export class RequestComponent implements OnInit {
   }
 
   get request() {
-    return this.requestForm.controls.request;
+     return this.requestForm.controls.request;
+
+
   }
 
   get priority() {
@@ -41,7 +43,7 @@ export class RequestComponent implements OnInit {
   ngOnInit() {
     this.requestForm = this.formBuilder.group({
       priority: ['', Validators.required],
-      title: ['', [Validators.required, Validators.minLength(20)]],
+      title: ['', [Validators.required, Validators.maxLength(40)]],
       request: ['', Validators.required]
     });
   }

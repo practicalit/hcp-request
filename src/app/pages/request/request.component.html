@@ -34,6 +34,7 @@
               </div>
             </div> 
             <input formControlName="title" type="text" class="form-control" [ngClass]="{'is-invalid': title.touched && title.errors}" id="title" aria-describedby="title">
+            <p> Please limit the length of the title to 40 characters</p>
           </div>          
           <div class="form-group">
             <label class="form-check-label" for="message">Message (required)</label>
@@ -42,8 +43,8 @@
                 Message is required.
               </div>
             </div>
-            <textarea formControlName="request" class="form-control" [ngClass]="{'is-invalid': request.touched && request.errors}"  id="message" rows="6"></textarea>
-          </div>
+            <textarea formControlName="request" ng-model = "x" class="form-control" [ngClass]="{'is-invalid': request.touched && request.errors}" id="message" rows="6"></textarea>
+            </div>
           <div [ngClass]="{'success': success, 'error': !success}">{{message}}</div>
           <button [disabled]='!requestForm.valid' type="submit" class="btn btn-primary">Request</button>
         </form>

@@ -16,11 +16,17 @@
             <span *ngIf="(priority.touched || priority.dirty) && formSubmitted && priority.invalid && priority.errors.required">
               Priority is required.
             </span>
-            <select formControlName="priority" class="form-control" id="priority">
+            <select formControlName="priority" class="form-control" id="priority" (change) = "onPriorityChange()">
               <option value="">Select Priority</option>
               <option value="1">High</option>
               <option value="2">Medium</option>
               <option value="3">Low</option>
+            </select>
+            <select  class="form-control" *ngIf="showPeriod">            
+              <option value="1">With in a day</option>
+              <option value="2">With in two days</option>
+              <option value="3">With in a week</option>
+              <option value="4">After a week</option>
             </select>
           </div>
           <div class="form-group">

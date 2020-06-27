@@ -13,7 +13,7 @@ export class RequestComponent implements OnInit {
   validForm: boolean = false;
   formSubmitted:boolean = false;
   success:boolean;
-
+  showPeriod:boolean;
   requestForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
@@ -52,7 +52,14 @@ export class RequestComponent implements OnInit {
   get form() {
     return this.requestForm.controls;
   }
-
+  onPriorityChange() {
+    if (this.form.priority.value == 1){
+      this.showPeriod = true;
+     }else{
+      this.showPeriod = false;
+     }
+  }
+       
   onSubmit() {
     this.formSubmitted = true;
     if (this.requestForm.invalid) {

@@ -70,6 +70,20 @@ export class IndividualService {
       );
   }
 
+  /**
+   * Change the status of the individual.
+   * @todo, this shall be a part of the individual update?
+   * @param individual_id
+   * @param active
+   */
+  public updateActiveStatus(individual_id: number, active: number):Observable<any> {
+    let $url = `${environment.server}${environment.individualAddressUpdateEndPoint}`;
+    let payload = {active: active, individual_id: individual_id};
+    return this.http.post<any>(
+      $url, payload, this.getBasicHeaderWithAuth()
+      );
+  }
+
   private getBasicHeader() {
     return {
       headers: new HttpHeaders({

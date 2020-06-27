@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from 'src/app/dashboard.service';
+import { IndividualService } from 'src/app/services/individual.service';
+import { BaseIndividualComponent } from 'src/app/models/base.individual.component';
 
 @Component({
   selector: 'app-awesome-professionals',
   templateUrl: './awesome-professionals.component.html',
   styleUrls: ['./awesome-professionals.component.css']
 })
-export class AwesomeProfessionalsComponent implements OnInit {
+export class AwesomeProfessionalsComponent extends BaseIndividualComponent implements OnInit {
   professionals: any[];
 
   constructor(
-    private dashboardService: DashboardService) {
+    private dashboardService: DashboardService,
+    protected individualService: IndividualService) {
+      super();
   }
 
   ngOnInit(): void {

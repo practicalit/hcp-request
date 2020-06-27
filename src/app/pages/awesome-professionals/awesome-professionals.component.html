@@ -33,7 +33,8 @@
 
                   </td>
                   <td>
-                    <button id="Deactivate" type="button" class="btn-sm btn-primary">Deactivate</button>
+                    <button [attr.individual_id]="professional.individual_id" [attr.status]="professional.active" (click)='switchStatus($event)' 
+                    [ngClass]="professional.active == 0 ? 'btn-success' : 'btn-danger'" type="button" class="btn-sm">{{professional.active == 0 ? 'Activate' : 'Deactivate'}}</button>
                   </td>
                 </tr>
               </tbody>

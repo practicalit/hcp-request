@@ -130,7 +130,7 @@
                   <a [routerLink]="['/user-profile']">{{request.first_name | titlecase}} {{request.last_name | titlecase}}</a>
                 </th>
                 <td>
-                  <a [title]="request.title" [routerLink]="['/request-detail',request.request_id]">{{request.title}}</a>
+                  <a [title]="request.title" [routerLink]="['/request-detail',request.request_id]">{{ request.title.length > 25 ? (request.title | slice:0:25) + '.....' : request.title}}</a>
                 </td>
                 <td>
                   {{request.name}}

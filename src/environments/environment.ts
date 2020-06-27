@@ -24,6 +24,7 @@ export const environment = {
   oAuthLogin: '/ajax.php?action=oauth-login',
   statesEndPoint: '/ajax.php?action=list-states',
   citiesEndPoint: '/ajax.php?action=list-cities',
+  changeActiveStatusEndPoint: '/ajax.php?action=change-active-status',
   firebase: {
     apiKey: "AIzaSyCWj9mkUKqWAkywvXkK0-wg8X4OSyHXhpw",
     authDomain: "login-ng-a0220.firebaseapp.com",

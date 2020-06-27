@@ -43,7 +43,7 @@ export class RequestComponent implements OnInit {
   ngOnInit() {
     this.requestForm = this.formBuilder.group({
       priority: ['', Validators.required],
-      title: ['', [Validators.required, Validators.maxLength(40)]],
+      title: ['', [Validators.required, Validators.minLength(20)]],
       request: ['', Validators.required]
     });
   }

@@ -24,6 +24,7 @@ export class AllVolunteersComponent implements OnInit {
     this.dashboardService.getVolunteers().subscribe(response => {
       if (response.success) {
         this.volunteers = response.data;
+        console.log(this.volunteers)
       }
     })
   }
@@ -37,12 +38,14 @@ export class AllVolunteersComponent implements OnInit {
    * @param individual_id - the individual id whose status is to be changed
    * @param event - the button that is clicked - needed to change its label
    */
-  public changeStatus(individual_id: number, event: any) {
-    this.individualService.changeStatus(individual_id, 0).subscribe(response => {
-      console.log(response);
+  public changeStatus(individual_id: string, currentStatus: number, event: any) {
+    var Status = currentStatus == 0 ? 1 : 0;
+    this.individualService.changeStatus(Number.parseInt(individual_id), Status).subscribe(response => {
       if (response.success) {
+        var individual = this.volunteers.filter(v => v.individual_id == individual_id)[0];
+        individual.active = Status;
         //if changing the state happened correctly, then switch the text to 'activate'
-        event.target.innerHTML = 'Activate';
+        event.target.innerHTML = individual.active == 0 ? 'Activate' : 'Deactivate';
       }
     })
   }

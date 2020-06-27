@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col">
       <div class="card shadow border-0">
-        <div class="">
+        <div class="">`
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
@@ -32,8 +32,9 @@
                   <a>{{volunteer.email}}</a>
                 </td>
                 <td>
-                  <button id='{{volunteer.individual_id}}' (click)="changeStatus(volunteer.individual_id, $event)" type="button"
-                    class="btn-sm btn-primary">Deactivate</button>
+                  <button 
+                  id='{{volunteer.individual_id}}' (click)="changeStatus(volunteer.individual_id, volunteer.active, $event)" type="button"
+                    class="btn-sm btn-primary">{{volunteer.active == 0 ? 'Activate' : 'Deactivate'}}</button>
                 </td>
               </tr>
             </tbody>

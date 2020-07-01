@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   public location: Location;
 
   firstName: string;
+  lastName: string;
   constructor(
     location: Location,  
     private element: ElementRef, 
@@ -26,6 +27,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     this.firstName = this.authService.getFirstName();
+    this.lastName = this.authService.getLastName();
+    
   }
   getTitle(){
     var title = this.location.prepareExternalUrl(this.location.path());

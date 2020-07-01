@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { IndividualService } from 'src/app/services/individual.service';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class SettingComponent implements OnInit {
   settingForm: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private individualService: IndividualService
   ) { }
 
   ngOnInit(): void {
@@ -31,7 +33,20 @@ export class SettingComponent implements OnInit {
   }
 
   onSubmit() {
+    this.individualService.updateSetting(
+      this.allowEmail,
+      +this.settingForm.controls['emailPerDay'].value,
+      +this.settingForm.controls['emailPerWeek'].value,
+      this.allowSMS,
+      +this.settingForm.controls['smsPerDay'].value,
+      +this.settingForm.controls['smsPerWeek'].value
+    ).subscribe(result => {
+      console.log(result);
+    });
+  }
 
+  getFormValue(control: string) {
+    this.settingForm.controls[control].value;
   }
 
   handleINeedEmail() {

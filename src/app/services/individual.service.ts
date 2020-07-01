@@ -84,6 +84,21 @@ export class IndividualService {
       );
   }
 
+  public updateSetting(allow_email: boolean, email_per_day: number, email_per_week: number, allow_sms: boolean, sms_per_day: number, sms_per_week: number) {
+    let $url = `${environment.server}${environment.settingsEndpoint}`;
+    let payload = {
+      allow_email: allow_email, 
+      email_per_day: email_per_day, 
+      email_per_week: email_per_week, 
+      allow_sms: allow_sms, 
+      sms_per_day: sms_per_day, 
+      sms_per_week: sms_per_week,
+    };
+    return this.http.post<any>(
+      $url, payload, this.getBasicHeaderWithAuth()
+    );
+  }
+
   private getBasicHeader() {
     return {
       headers: new HttpHeaders({

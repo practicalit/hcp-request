@@ -175,7 +175,21 @@ export class AuthenticationService {
     }
     return null;
   }
+  public getState(): string {
+    if (this.logged) {
+      let user = JSON.parse(localStorage.getItem(CURRENT_USER));
+      return user.data.state;
+    }
+    return null;
+  }
 
+  public getCity(): string {
+    if (this.logged) {
+      let user = JSON.parse(localStorage.getItem(CURRENT_USER));
+      return user.data.city;
+    }
+    return null;
+  }
   /**
    * Check if token has expired or not.
    */

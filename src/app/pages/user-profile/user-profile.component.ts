@@ -10,6 +10,8 @@ export class UserProfileComponent implements OnInit {
   email: string;
   firstName: string;
   lastName: string;
+  state: string;
+  city: string;
   constructor(
     private authService: AuthenticationService
   ) { }
@@ -17,6 +19,8 @@ export class UserProfileComponent implements OnInit {
     this.email = this.authService.getEmail();
     this.firstName = this.authService.getFirstName();
     this.lastName = this.authService.getLastName();
+    this.state = this.authService.getState();
+    this.city = this.authService.getCity();
   }
 
 }

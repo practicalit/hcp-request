@@ -78,6 +78,16 @@ export class IndividualService {
     };
   }
 
+  public forgotPassword(email:string ): Observable<any> {
+  
+    let $url = `${environment.server}${environment.forgotPasswordEndPoint}`,
+    payload = {email:email};
+    return this.http.post<any>(
+      $url, payload, this.getBasicHeaderWithAuth()
+    );
+  }
+
+
   //move this upstairs than copying for all services here and there.
   private getBasicHeaderWithAuth() {
     return {

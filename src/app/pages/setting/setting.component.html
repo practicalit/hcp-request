@@ -23,8 +23,7 @@
         <input formControlName="emailPerWeek" type="text" class="form-control" id="emails_per_week">
       </div>
     </div>
-
-    <div class="form-group form-check">
+      <div class="form-group form-check">
       <input formControlName="getSMSs" (change)="handleINeedSMS()" type="checkbox" class="form-check-input">
       <label class="form-check-label" for="get_email">I want to get SMS notification</label>
     </div>
@@ -38,6 +37,6 @@
         <input formControlName="smsPerWeek" type="text" class="form-control" id="sms_per_week">
       </div>
     </div>
-    <button *ngIf="allowSMS || allowEmail" type="submit" class="btn btn-primary">Submit</button>
+    <button *ngIf="allowSMS || allowEmail" type="onsubmit" class="btn btn-primary">Submit</button>
   </div>
 </form>

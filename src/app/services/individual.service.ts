@@ -85,6 +85,7 @@ export class IndividualService {
   }
 
   public updateSetting(allow_email: boolean, email_per_day: number, email_per_week: number, allow_sms: boolean, sms_per_day: number, sms_per_week: number) {
+    debugger;
     let $url = `${environment.server}${environment.settingsEndpoint}`;
     let payload = {
       allow_email: allow_email, 

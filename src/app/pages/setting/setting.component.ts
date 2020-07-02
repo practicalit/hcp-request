@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder} from '@angular/forms';
 import { IndividualService } from 'src/app/services/individual.service';
-
 
 @Component({
   selector: 'app-setting',

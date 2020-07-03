@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment'; 
 import { Individual } from '../models/individual.model';
 import { AuthenticationService } from './authentication.service';
+import { IndividualSetting } from '../models/individual.setting.model';
 
 /**
  * Service class for individuals
@@ -84,19 +85,15 @@ export class IndividualService {
       );
   }
 
-  public updateSetting(allow_email: boolean, email_per_day: number, email_per_week: number, allow_sms: boolean, sms_per_day: number, sms_per_week: number) {
-    debugger;
+  /**
+   * Update the settings of individual 
+   * @todo - needs testing and validation
+   * @param individual_setting
+   */
+  public updateSetting(individual_setting: IndividualSetting): Observable<any> {
     let $url = `${environment.server}${environment.settingsEndpoint}`;
-    let payload = {
-      allow_email: allow_email, 
-      email_per_day: email_per_day, 
-      email_per_week: email_per_week, 
-      allow_sms: allow_sms, 
-      sms_per_day: sms_per_day, 
-      sms_per_week: sms_per_week,
-    };
     return this.http.post<any>(
-      $url, payload, this.getBasicHeaderWithAuth()
+      $url, individual_setting, this.getBasicHeaderWithAuth()
     );
   }
 

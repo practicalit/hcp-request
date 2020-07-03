@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormGroup, FormBuilder} from '@angular/forms';
 import { IndividualService } from 'src/app/services/individual.service';
+import { IndividualSetting } from 'src/app/models/individual.setting.model';
 
 @Component({
   selector: 'app-setting',
@@ -24,22 +24,22 @@ export class SettingComponent implements OnInit {
     this.settingForm = this.formBuilder.group({
       getEmails: [''],
       getSMSs: [''],
-      emailPerDay: [''],
-      smsPerDay: [''],
-      emailPerWeek: [''],
-      smsPerWeek: ['']
+      emailPerDay: ['0'],
+      smsPerDay: ['0'],
+      emailPerWeek: ['0'],
+      smsPerWeek: ['0']
     });
   }
 
   onSubmit() {
-    this.individualService.updateSetting(
-      this.allowEmail,
-      +this.settingForm.controls['emailPerDay'].value,
-      +this.settingForm.controls['emailPerWeek'].value,
-      this.allowSMS,
-      +this.settingForm.controls['smsPerDay'].value,
-      +this.settingForm.controls['smsPerWeek'].value
-    ).subscribe(result => {
+    let setting: IndividualSetting = new IndividualSetting();
+    setting.allow_email = this.allowEmail ? 1 : 0;
+    setting.allow_sms = this.allowSMS ? 1 : 0;
+    setting.email_per_day = this.settingForm.controls['emailPerDay'].value;
+    setting.email_per_week = this.settingForm.controls['emailPerWeek'].value;
+    setting.sms_per_day = this.settingForm.controls['smsPerDay'].value;
+    setting.sms_per_week = this.settingForm.controls['smsPerWeek'].value;
+    this.individualService.updateSetting(setting).subscribe(result => {
       console.log(result);
     });
   }

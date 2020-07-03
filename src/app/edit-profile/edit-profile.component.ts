@@ -21,6 +21,9 @@ export class EditProfileComponent implements OnInit {
   email: string;
   firstName: string;
   lastName: string;
+  editable: boolean = false;
+  state: string;
+  city: string;
 
   constructor(
     private authService: AuthenticationService,
@@ -39,14 +42,15 @@ export class EditProfileComponent implements OnInit {
       lastName: ['']
     });
 
-    //populate the state
-    this.populateState();
-
-    this.editForm.controls.email.setValue(this.authService.getLoggedMemberProperty(Constants.EMAIL));
-    this.editForm.controls.firstName.setValue(this.authService.getLoggedMemberProperty(Constants.FIRST_NAME));
-    this.editForm.controls.lastName.setValue(this.authService.getLoggedMemberProperty(Constants.LAST_NAME));
-    this.editForm.controls.state.setValue(this.authService.getLoggedMemberProperty(Constants.STATE_ID));
-    this.populateCity(this.authService.getLoggedMemberProperty(Constants.STATE_ID));
+    this.email = this.authService.getLoggedMemberProperty(Constants.EMAIL);
+    this.editForm.controls.email.setValue(this.email);
+    this.firstName = this.authService.getLoggedMemberProperty(Constants.FIRST_NAME);
+    this.editForm.controls.firstName.setValue(this.firstName);
+    this.lastName = this.authService.getLoggedMemberProperty(Constants.LAST_NAME);
+    this.editForm.controls.lastName.setValue(this.lastName);
+    this.state = this.authService.getLoggedMemberProperty(Constants.STATE);
+    this.city = this.authService.getLoggedMemberProperty(Constants.CITY);
+    
   }
 
   private populateState() {
@@ -98,6 +102,14 @@ export class EditProfileComponent implements OnInit {
         }
       );
     //}
+  }
+
+  switchEditable() {
+    this.editable = true;
+    //populate the state
+    this.populateState();
+    this.editForm.controls.state.setValue(this.authService.getLoggedMemberProperty(Constants.STATE_ID));
+    this.populateCity(this.authService.getLoggedMemberProperty(Constants.STATE_ID));
   }
 
 }

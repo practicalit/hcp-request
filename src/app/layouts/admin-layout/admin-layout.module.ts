@@ -9,7 +9,6 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
 import { HomeComponent } from '../../pages/home/home.component';
 import { IconsComponent } from '../../pages/icons/icons.component';
 import { RequestComponent } from '../../pages/request/request.component';
-import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RequestDetailComponent } from 'src/app/pages/request-detail/request-detail.component';
@@ -28,7 +27,6 @@ import { CommentComponent } from 'src/app/pages/comment/comment.component';
   ],
   declarations: [
     HomeComponent,
-    UserProfileComponent,
     TablesComponent,
     IconsComponent,
     RequestComponent,

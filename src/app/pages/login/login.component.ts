@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   showSpinner: boolean; 
   loginFailed = false;
   loginForm: FormGroup;
-
+  
   ngOnInit() {
 
     this.loginForm = this.formBuilder.group({
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
   }
-
+  
   /**
    * Handler for the page submission
    */

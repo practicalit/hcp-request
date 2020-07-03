@@ -24,6 +24,7 @@ import { AwesomeVolunteersComponent } from './pages/awesome-volunteers/awesome-v
 import { AwesomeProfessionalsComponent } from './pages/awesome-professionals/awesome-professionals.component';
 import { AllVolunteersComponent } from './pages/all-volunteers/all-volunteers.component';
 import { SettingComponent } from './pages/setting/setting.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import { SettingComponent } from './pages/setting/setting.component';
     AwesomeProfessionalsComponent,
     AllVolunteersComponent,
     SettingComponent,
+    ForgotPasswordComponent,
    
   ],
   providers: [],

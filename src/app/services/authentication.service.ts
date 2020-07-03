@@ -55,7 +55,7 @@ export class AuthenticationService {
       { "email": email, "password": password }, this.getBasicHeader()
     );
   }
-
+  
   /**
    * Generic oAuth handler.
    * @param email 

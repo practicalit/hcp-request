@@ -72,7 +72,6 @@ export class RoleStateComponent implements OnInit {
    */
   onSubmit() {
     let role_id: number = this.roleForm.controls.role.value;
-    console.log("holla here");
     let state_id: number = this.roleForm.controls.state.value;
     let city_id: number = this.roleForm.controls.city.value;
     let individual = new Individual();

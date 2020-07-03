@@ -16,4 +16,6 @@ export class Constants {
     static EMAIL = "email";
     static STATE_ID = "state_id";
     static CITY_ID = "city_id";
+    static STATE = "state";
+    static CITY = "city";
 }

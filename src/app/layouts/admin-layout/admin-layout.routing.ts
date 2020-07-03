@@ -13,7 +13,8 @@ import { RoleStateComponent } from 'src/app/pages/role-state/role-state.componen
 import { AwesomeVolunteersComponent } from 'src/app/pages/awesome-volunteers/awesome-volunteers.component';
 import { AwesomeProfessionalsComponent } from 'src/app/pages/awesome-professionals/awesome-professionals.component';
 import { AllVolunteersComponent } from 'src/app/pages/all-volunteers/all-volunteers.component';
-import {CommentComponent} from 'src/app/pages/comment/comment.component';
+import { CommentComponent } from 'src/app/pages/comment/comment.component';
+import { ForgotPasswordComponent } from 'src/app/pages/forgot-password/forgot-password.component';
 export const AdminLayoutRoutes: Routes = [
     { path: 'home',           component: HomeComponent, canActivate: [AuthGuardService]  },
     { path: 'user-profile',   component: UserProfileComponent },
@@ -27,5 +28,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'awesome-professionals', component: AwesomeProfessionalsComponent, canActivate: [AuthGuardService] },
     { path: 'all-volunteers', component: AllVolunteersComponent, canActivate: [AuthGuardService] },
     { path: 'comment/:request_id', component: CommentComponent, canActivate: [AuthGuardService] },
-    { path: 'setting', component: SettingComponent, canActivate: [AuthGuardService] }
+    { path: 'setting', component: SettingComponent, canActivate: [AuthGuardService] },
+    { path: 'forgot-password', component: ForgotPasswordComponent }
 ];

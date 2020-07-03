@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   showSpinner: boolean; 
   loginFailed = false;
   loginForm: FormGroup;
-  resetPassword:boolean;
+  
   ngOnInit() {
 
     this.loginForm = this.formBuilder.group({
@@ -43,11 +43,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
   
-  forgotPassword(){
-    if (this.form.forgotPassword){
-      this.resetPassword = true;
-     }
-  }
   /**
    * Handler for the page submission
    */

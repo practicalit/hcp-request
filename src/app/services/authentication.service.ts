@@ -55,13 +55,6 @@ export class AuthenticationService {
       { "email": email, "password": password }, this.getBasicHeader()
     );
   }
-
-  public forgotPassword(email:string): Observable<any> {
-    return this.http.post<any>(
-      `${environment.server}${environment.forgotPasswordEndPoint}`,
-      {"email": email},this.getBasicHeader() 
-    );
-  }
   
   /**
    * Generic oAuth handler.

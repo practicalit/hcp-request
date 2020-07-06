@@ -16,7 +16,10 @@ export class HomeComponent implements OnInit {
 
   public clicked: boolean = true;
   public clicked1: boolean = false;
-  public activeView: string = "REQUEST"
+  public activeView: string = "REQUEST";
+
+  member_role: string;
+
   constructor(
     private requestService: RequestService,
     private router: Router,
@@ -57,6 +60,8 @@ export class HomeComponent implements OnInit {
         }
       );
     }
+
+    this.member_role = this.authService.getRole();
   }
 
   /**

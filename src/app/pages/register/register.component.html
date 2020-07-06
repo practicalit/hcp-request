@@ -45,6 +45,10 @@
                   <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                 </div>
                 <input formControlName="firstName" class="form-control" placeholder="First Name" type="text">
+                <div *ngIf="myForm.controls.firstName.invalid"
+                      class="alert alert-danger">
+                      <div *ngIf="myForm.controls.firstName.errors.required">
+                        First Name is Required.
               </div>
             </div>            
             <div class="form-group">
@@ -53,6 +57,11 @@
                   <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                 </div>
                 <input formControlName="email" class="form-control" placeholder="Email" type="email">
+                <div *ngIf="myForm.controls.email.invalid"
+                      class="alert alert-danger">
+                      <div *ngIf="myForm.controls.email.errors.required">
+                        Email is Required.
+                </div>
               </div>
             </div>
             <div class="form-group">
@@ -61,9 +70,13 @@
                   <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                 </div>
                 <input formControlName="password" class="form-control" placeholder="password" type="password">
+                <div *ngIf="myForm.controls.password.invalid"
+                      class="alert alert-danger">
+                      <div *ngIf="myForm.controls.password.errors.required">
+                       Password is Required.
               </div>
             </div>
-            <div [ngClass]="{'success': !registerForm.invalid, 'error': registerForm.invalid}">Fill All Three</div>      
+            <div [ngClass]="{'success': !registerForm.invalid, 'error': registerForm.invalid}">{{message}}</div>      
             <div class="text-center">
               <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary mt-4">Create account</button>
             </div>

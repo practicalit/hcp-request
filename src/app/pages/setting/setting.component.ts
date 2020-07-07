@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder} from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { IndividualService } from 'src/app/services/individual.service';
 import { IndividualSetting } from 'src/app/models/individual.setting.model';
 
@@ -12,7 +12,7 @@ export class SettingComponent implements OnInit {
 
   allowEmail: boolean = false;
   allowSMS: boolean = false;
-
+  setting: any;
   settingForm: FormGroup;
 
   constructor(
@@ -21,26 +21,26 @@ export class SettingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.setting = this.individualService.getUserSetting()
     this.settingForm = this.formBuilder.group({
-      getEmails: [''],
-      getSMSs: [''],
-      emailPerDay: ['0'],
-      smsPerDay: ['0'],
-      emailPerWeek: ['0'],
-      smsPerWeek: ['0']
+      getEmails: [this.setting.allow_email],
+      getSMSs: [this.setting.allow_sms],
+      emailPerDay: [this.setting.emails_per_day],
+      smsPerDay: [this.setting.sms_per_day],
+      emailPerWeek: [this.setting.emails_per_week],
+      smsPerWeek: [this.setting.sms_per_week]
     });
   }
 
   onSubmit() {
-    let setting: IndividualSetting = new IndividualSetting();
-    setting.allow_email = this.allowEmail ? 1 : 0;
-    setting.allow_sms = this.allowSMS ? 1 : 0;
-    setting.email_per_day = this.settingForm.controls['emailPerDay'].value;
-    setting.email_per_week = this.settingForm.controls['emailPerWeek'].value;
-    setting.sms_per_day = this.settingForm.controls['smsPerDay'].value;
-    setting.sms_per_week = this.settingForm.controls['smsPerWeek'].value;
-    this.individualService.updateSetting(setting).subscribe(result => {
-      console.log(result);
+    this.setting = new IndividualSetting();
+    this.setting.allow_email = this.allowEmail ? 1 : 0;
+    this.setting.allow_sms = this.allowSMS ? 1 : 0;
+    this.setting.email_per_day = this.settingForm.controls['emailPerDay'].value;
+    this.setting.email_per_week = this.settingForm.controls['emailPerWeek'].value;
+    this.setting.sms_per_day = this.settingForm.controls['smsPerDay'].value;
+    this.setting.sms_per_week = this.settingForm.controls['smsPerWeek'].value;
+    this.individualService.updateSetting(this.setting).subscribe(result => {
     });
   }
 

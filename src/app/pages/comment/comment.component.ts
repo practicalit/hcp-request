@@ -30,20 +30,7 @@ export class CommentComponent implements OnInit {
   requestedBy: string;
   ngOnInit(): void {
     this.comments = [];
-    this.activatedRoute.paramMap.subscribe(
-      params => {
-        this.request_id = Number(params.get('requestId'));
-        if (this.request_id != null && this.request_id) {
-          this.requestService.getComments(this.request_id).subscribe(response => {
-            if (response.success) {
-              this.comments = response.data;
-            }
-          }
-          )
-        }
-      }
-    );
-
+    this.loadComment();
     this.commentForm = this.formBuilder.group({
       comment: ['', Validators.required]
     });
@@ -57,12 +44,30 @@ export class CommentComponent implements OnInit {
       request_id: this.object_id,
       comment: this.commentForm.controls.comment.value
     };
-    this.requestService.postComment(request).subscribe(
+   this.requestService.postComment(request).subscribe(
       response => {
         if (response) {
-          this.message = "Successfully posted the comment";
+          this.message = "Successfully posted the comment.";
+          this.comments = [];
+          this.loadComment();
         } else {
           this.message = "It didn't go through, please try again";
+        }
+      }
+    );
+  }
+
+  loadComment(){
+    this.activatedRoute.paramMap.subscribe(
+      params => {
+        this.request_id = Number(params.get('requestId'));
+        if (this.request_id != null && this.request_id) {
+          this.requestService.getComments(this.request_id).subscribe(response => {
+            if (response.success) {
+              this.comments = response.data;
+            }
+          }
+          )
         }
       }
     );

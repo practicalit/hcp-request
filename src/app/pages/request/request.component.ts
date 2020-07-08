@@ -15,6 +15,7 @@ export class RequestComponent implements OnInit {
   success:boolean;
   showPeriod:boolean;
   requestForm: FormGroup;
+  max_characters = 500; //todo read this from constants.
 
   constructor(private formBuilder: FormBuilder,
     private requestService: RequestService) { }
@@ -44,7 +45,7 @@ export class RequestComponent implements OnInit {
     this.requestForm = this.formBuilder.group({
       priority: ['', Validators.required],
       title: ['', [Validators.required, Validators.minLength(20)]],
-      request: ['', Validators.required]
+      request: ['', [Validators.required, Validators.maxLength(this.max_characters)]]
     });
   }
 

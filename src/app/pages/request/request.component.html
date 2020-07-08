@@ -51,7 +51,7 @@
                 Message is required.
               </div>
             </div>
-            <textarea formControlName="request" ng-model = "x" class="form-control" [ngClass]="{'is-invalid': request.touched && request.errors}" id="message" rows="6"></textarea>
+            <textarea formControlName="request" ng-model = "x" maxlength="5000" class="form-control" [ngClass]="{'is-invalid': request.touched && request.errors}" id="message" rows="6"></textarea>
             </div>
           <div [ngClass]="{'success': success, 'error': !success}">{{message}}</div>
           <button [disabled]='!requestForm.valid' type="submit" class="btn btn-primary">Request</button>

@@ -30,18 +30,6 @@ export class IndividualService {
       $url, individual, this.getBasicHeader()
       );
   }
-  public getUserSetting() {
-    let userSetting = {
-      allow_email: 1, 
-      emails_per_day: 10, 
-      emails_per_week: 50,
-      allow_sms: 1, 
-      sms_per_day: 5, 
-      sms_per_week: 10
-    };
-    return userSetting;
-  
-  }
   /**
    * Update the role of the member.
    * @param role_id 

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder} from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { IndividualService } from 'src/app/services/individual.service';
 import { IndividualSetting } from 'src/app/models/individual.setting.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-setting',
@@ -14,25 +15,30 @@ export class SettingComponent implements OnInit {
   allowSMS: boolean = false;
   individual_setting: any;
   settingForm: FormGroup;
+  user: any;
+  email: string;
+  password: string;
+  form: any;
 
   constructor(
     private formBuilder: FormBuilder,
-    private individualService: IndividualService
+    private individualService: IndividualService,
+    private authService: AuthenticationService,
   ) { }
 
   ngOnInit(): void {
     this.settingForm = this.formBuilder.group({
-      getEmails: [this.individual_setting.allow_email],
-      getSMSs: [this.individual_setting.allow_sms],
-      emailPerDay: [this.individual_setting.email_per_day],
-      smsPerDay: [this.individual_setting.sms_per_day],
-      emailPerWeek: [this.individual_setting.email_per_week],
-      smsPerWeek: [this.individual_setting.sms_per_week]
+      getEmails: [this.authService.getLoggedMemberProperty('allow_email')],
+      getSMSs: [this.authService.getLoggedMemberProperty('allow_sms')],
+      emailPerDay: [this.authService.getLoggedMemberProperty('email_per_day')],
+      smsPerDay: [this.authService.getLoggedMemberProperty('sms_per_day')],
+      emailPerWeek: [this.authService.getLoggedMemberProperty('email_per_week')],
+      smsPerWeek: [this.authService.getLoggedMemberProperty('sms_per_week')]
     });
   }
 
   onSubmit() {
-    let individual_setting: IndividualSetting = new IndividualSetting();
+    let individual_setting = new IndividualSetting();
     individual_setting.allow_email = this.allowEmail ? 1 : 0;
     individual_setting.allow_sms = this.allowSMS ? 1 : 0;
     individual_setting.email_per_day = this.settingForm.controls['emailPerDay'].value;
@@ -40,6 +46,14 @@ export class SettingComponent implements OnInit {
     individual_setting.sms_per_day = this.settingForm.controls['smsPerDay'].value;
     individual_setting.sms_per_week = this.settingForm.controls['smsPerWeek'].value;
     this.individualService.updateSetting(individual_setting).subscribe(result => {
+      if (result.success) {
+        this.authService.setLoggedMemberProperty('allow_email', individual_setting.allow_email);
+        this.authService.setLoggedMemberProperty('allow_sms', individual_setting.allow_sms);
+        this.authService.setLoggedMemberProperty('email_per_day', individual_setting.email_per_day);
+        this.authService.setLoggedMemberProperty('sms_per_day', individual_setting.sms_per_day);
+        this.authService.setLoggedMemberProperty('email_per_week', individual_setting.email_per_week);
+        this.authService.setLoggedMemberProperty('sms_per_week', individual_setting.sms_per_week);
+      }
       console.log(result);
     });
   }

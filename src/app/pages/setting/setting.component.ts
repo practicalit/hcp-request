@@ -27,6 +27,8 @@ export class SettingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.allowEmail = this.authService.getLoggedMemberProperty('allow_email');
+    this.allowSMS = this.authService.getLoggedMemberProperty('allow_sms');
     this.settingForm = this.formBuilder.group({
       getEmails: [this.authService.getLoggedMemberProperty('allow_email')],
       getSMSs: [this.authService.getLoggedMemberProperty('allow_sms')],

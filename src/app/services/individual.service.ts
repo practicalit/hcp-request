@@ -30,7 +30,6 @@ export class IndividualService {
       $url, individual, this.getBasicHeader()
       );
   }
-
   /**
    * Update the role of the member.
    * @param role_id 

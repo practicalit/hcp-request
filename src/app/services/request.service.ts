@@ -107,6 +107,15 @@ export class RequestService {
     }
   }
 
+  public removeRequest(request_id: number): Observable<any> {
+    if (request_id) {
+      let url:string = `${environment.server}${environment.requestRemoveEndPoint}`; 
+      return this.http.post<any>(
+        url, {request_id: request_id}, this.getBasicHeader()
+      );
+    } 
+  }
+
   //move this upstairs than copying for all services here and there.
   private getBasicHeader() {
     return {

@@ -84,7 +84,15 @@ export class RequestDetailComponent implements OnInit {
   }
 
   confirmRemove() {
-    this.removal_content = "Removal triggered."
+    this.removal_content = "Removal triggered.";
+
+    this.requestService.removeRequest(this.request_id).subscribe(response => {
+      if(response.success) {
+
+      } else {
+        
+      }
+    });
   }
 
   /**

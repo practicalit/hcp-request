@@ -85,6 +85,8 @@ export class RequestDetailComponent implements OnInit {
 
   confirmRemove() {
     this.removal_content = "Removal triggered."
+    return this.http.delete<any>(AppSettings.requestByIdEndPoint + '/ajax.php?action=request-by-id');
+    
   }
 
   /**

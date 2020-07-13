@@ -3,6 +3,9 @@
     font-weight: bold;
 }
 .error {
-    @extend .success;
     color: red;
 }
+ .errors {
+     color: red;
+     font-weight: bold;
+ }

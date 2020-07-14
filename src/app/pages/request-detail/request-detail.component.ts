@@ -88,9 +88,9 @@ export class RequestDetailComponent implements OnInit {
 
     this.requestService.removeRequest(this.request_id).subscribe(response => {
       if(response.success) {
-
+        this.removal_content = "Request detail successfully deleted.";
       } else {
-        
+        this.removal_content = "Failed while deteting request detail.";
       }
     });
   }

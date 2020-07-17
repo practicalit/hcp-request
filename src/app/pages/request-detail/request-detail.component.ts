@@ -27,6 +27,7 @@ export class RequestDetailComponent implements OnInit {
   //this is to show if the current volunteer has picked the request.
   request_already_picked: boolean = false;
   editable: boolean = false;
+  deleteRequest: boolean;
 
   editForm: FormGroup;
   constructor(
@@ -84,12 +85,13 @@ export class RequestDetailComponent implements OnInit {
   }
 
   confirmRemove() {
-    this.removal_content = "Removal triggered.";
-
     this.requestService.removeRequest(this.request_id).subscribe(response => {
+      this.show_confirm_cancel = false;
       if(response.success) {
-        this.removal_content = "Request detail successfully deleted.";
+        this.deleteRequest = true;
+        this.removal_content = "Request detail deleted.";
       } else {
+        this.deleteRequest = false;
         this.removal_content = "Failed while deteting request detail.";
       }
     });

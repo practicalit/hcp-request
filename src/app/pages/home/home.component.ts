@@ -53,7 +53,6 @@ export class HomeComponent implements OnInit {
         response => {
           if (response.success) {
             debugger;
-            this.requests = response.data.filter(resp => resp.status_name != 'REMOVED');
           } else {
             //check this again. Failure from service is only login issue?
             this.redirect('/login');

@@ -11,7 +11,8 @@
                   <h5 class="card-title text-uppercase text-muted mb-0">Health Professionals:</h5>
                   <div class="row">
                     <div class="col"><span class="h2 font-weight-bold mb-0">{{dashboard.professionals}}</span> </div>
-                  <div class="col"><a [routerLink]="['/awesome-professionals']" class="btn-sm btn btn-primary">Show all</a></div>
+                    <div class="col"><a [routerLink]="['/awesome-professionals']" class="btn-sm btn btn-primary">Show
+                        all</a></div>
                   </div>
                 </div>
                 <div class="col-auto">
@@ -35,7 +36,8 @@
                   <h5 class="card-title text-uppercase text-muted mb-0">Our Volunteers:</h5>
                   <div class="row">
                     <div class="col"><span class="h2 font-weight-bold mb-0">{{dashboard.volunteers}}</span> </div>
-                    <div class="col"><a [routerLink]="['/all-volunteers']" class="btn-sm btn btn-primary">Show all</a></div>
+                    <div class="col"><a [routerLink]="['/all-volunteers']" class="btn-sm btn btn-primary">Show all</a>
+                    </div>
                   </div>
                 </div>
                 <div class="col-auto">
@@ -129,11 +131,16 @@
             <tbody *ngFor="let request of requests">
               <tr [ngClass]="{'placed': request.status_name == 'PLACED', 'picked': request.status_name == 'PICKED'}">
                 <th scope="row">
-                  <a [routerLink]="['/edit-profile']">{{request.first_name | titlecase}} {{request.last_name | titlecase}}</a>
+                  <a [routerLink]="['/edit-profile']">{{request.first_name | titlecase}}
+                    {{request.last_name | titlecase}}</a>
                 </th>
-                <td>
-                  <a [title]="request.title" [routerLink]="['/request-detail',request.request_id]">{{ request.title.length > 25 ? (request.title | slice:0:25) + '.....' : request.title}}</a>
+                <td *ngIf="member_role == 'BALEMUYA'">
+                  <a [title]="request.title"
+                    [routerLink]="['/request-detail',request.request_id]">{{ request.title.length > 25 ? (request.title | slice:0:25) + '.....' : request.title}}</a>
                 </td>
+                <td *ngIf="member_role != 'BALEMUYA'">
+                  {{ request.title.length > 25 ? (request.title | slice:0:25) + '.....' : request.title}}
+                </td> (edited)
                 <td>
                   {{request.name}}
                 </td>

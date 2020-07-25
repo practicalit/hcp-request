@@ -19,7 +19,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'edit-profile',   component: EditProfileComponent },
     { path: 'tables',         component: TablesComponent },
     { path: 'icons',          component: IconsComponent },
-    { path: 'request',        component: RequestComponent, canActivate: [AuthGuardService],  data: { roles: [1] } },
+    { path: 'request',        component: RequestComponent, canActivate: [AuthGuardService],  data: { role_id: [1] } },
     { path: 'request-detail/:requestId', component: RequestDetailComponent, canActivate: [AuthGuardService] },
     { path: 'add-role', component: RoleStateComponent, canActivate: [AuthGuardService] },
     { path: 'awesome-volunteers/:requestId', component: AwesomeVolunteersComponent, canActivate: [AuthGuardService] },

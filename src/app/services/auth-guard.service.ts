@@ -15,7 +15,7 @@ export class AuthGuardService implements CanActivate {
         if (this.authenticationService.logged &&
             !this.authenticationService.isTokenExpired()) {
             // // check if route is restricted by role
-            if (route.data.roles && route.data.roles.indexOf(this.currentUser.role) != -1) {
+            if (route.data.roles && route.data.roles.indexOf(this.currentUser.role_id) != -1) {
                 //     // role not authorised so redirect to home page
                 this.router.navigate(['/home']);
                 return false;

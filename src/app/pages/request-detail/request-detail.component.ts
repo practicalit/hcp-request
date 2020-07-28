@@ -49,6 +49,11 @@ export class RequestDetailComponent implements OnInit {
         }
       }
     );
+    
+    this.editForm = this.formBuilder.group({
+      title: ['', [Validators.required, Validators.minLength(20)]],
+      request: ['', Validators.required]
+    });
   }
 
   /**
@@ -104,7 +109,7 @@ export class RequestDetailComponent implements OnInit {
     //the form shall be editable only for the owner of the request.
     if (this.memberOwnsRequest()) {
       this.editable = true;
-      this.instantiateForm();
+      this.setFormValue();
     }
   }
 
@@ -112,18 +117,16 @@ export class RequestDetailComponent implements OnInit {
    * If the form is in the editable form, this handles the updated form
    */
   editRequest() {
-    this.editForm = this.formBuilder.group({
-      priority: ['', Validators.required],
-      title: ['', [Validators.required, Validators.minLength(20)]],
-      request: ['', Validators.required]
-    });
+    this.editForm.controls.title.setValue('');
+    this.editForm.controls.request.setValue('');
   }
 
   /**
    * Prepare the form if it needed to be updated.
    */
-  instantiateForm() {
-
+  setFormValue() {
+    this.editForm.controls.title.setValue(this.title);
+    this.editForm.controls.request.setValue(this.message);
   }
 
   /**

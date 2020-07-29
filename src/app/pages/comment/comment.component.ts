@@ -30,6 +30,7 @@ export class CommentComponent implements OnInit {
   requestedBy: string;
   ngOnInit(): void {
     this.comments = [];
+    this.comments.unshift();
     this.activatedRoute.paramMap.subscribe(
       params => {
         this.request_id = Number(params.get('requestId'));

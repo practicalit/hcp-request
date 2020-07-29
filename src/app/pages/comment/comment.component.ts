@@ -30,7 +30,6 @@ export class CommentComponent implements OnInit {
   requestedBy: string;
   ngOnInit(): void {
     this.comments = [];
-    this.comments.unshift();
     this.activatedRoute.paramMap.subscribe(
       params => {
         this.request_id = Number(params.get('requestId'));
@@ -62,6 +61,12 @@ export class CommentComponent implements OnInit {
       response => {
         if (response) {
           this.message = "Successfully posted the comment";
+    let new_comment = [];
+          new_comment['comment'] = new_comment;
+          new_comment['first_name'] = [];
+          new_comment['last_name'] = [];
+           this.comments.unshift(new_comment);
+
         } else {
           this.message = "It didn't go through, please try again";
         }

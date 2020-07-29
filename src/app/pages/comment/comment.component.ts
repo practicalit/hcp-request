@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommentRequest } from '../../models/comment.model';
 import { RequestService } from '../../services/request.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-comments',
@@ -25,6 +26,7 @@ export class CommentComponent implements OnInit {
     private formBuilder: FormBuilder,
     private requestService: RequestService,
     private activatedRoute: ActivatedRoute,
+    private authService: AuthenticationService
   ) { }
   request_id: number;
   requestedBy: string;
@@ -48,15 +50,18 @@ export class CommentComponent implements OnInit {
       response => {
         if (response) {
           this.message = "Successfully posted the comment.";
-          this.comments = [];
-          this.loadComment();
+          let new_comment = {};
+          new_comment['comment'] = this.commentForm.controls.comment.value;
+          new_comment['first_name'] = this.authService.getFirstName();
+          new_comment['last_name'] = this.authService.getLastName();
+          this.comments.unshift(new_comment);
+
         } else {
           this.message = "It didn't go through, please try again";
         }
       }
     );
   }
-
   loadComment(){
     this.activatedRoute.paramMap.subscribe(
       params => {
@@ -64,6 +69,7 @@ export class CommentComponent implements OnInit {
         if (this.request_id != null && this.request_id) {
           this.requestService.getComments(this.request_id).subscribe(response => {
             if (response.success) {
+              console.log(response);
               this.comments = response.data;
             }
           }

@@ -14,6 +14,7 @@ import { AwesomeProfessionalsComponent } from 'src/app/pages/awesome-professiona
 import { AllVolunteersComponent } from 'src/app/pages/all-volunteers/all-volunteers.component';
 import { CommentComponent } from 'src/app/pages/comment/comment.component';
 import { ForgotPasswordComponent } from 'src/app/pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from 'src/app/pages/reset-password/reset-password.component'
 export const AdminLayoutRoutes: Routes = [
     { path: 'home',           component: HomeComponent, canActivate: [AuthGuardService]  },
     { path: 'edit-profile',   component: EditProfileComponent },
@@ -27,4 +28,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'all-volunteers', component: AllVolunteersComponent, canActivate: [AuthGuardService] },
     { path: 'comment/:request_id', component: CommentComponent, canActivate: [AuthGuardService] },
     { path: 'setting', component: SettingComponent, canActivate: [AuthGuardService] },
+    { path: 'reset-password', component: ResetPasswordComponent, canActivate: [AuthGuardService] },
 ];

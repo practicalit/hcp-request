@@ -17,6 +17,7 @@ export const environment = {
   requestByIdEndPoint: '/ajax.php?action=request-by-id',
   requestPickedEndPoint: '/ajax.php?action=request-picked',
   addCommentEndPoint: '/ajax.php?action=add-comment',
+  requestRemoveEndPoint: '/ajax.php?action=remove-request',
   settingsEndpoint: '/ajax.php?action=settings',
   commentsListEndPoint: '/ajax.php?action=list-comments&request_id',
   awesomeVolunteerEndPoint: '/ajax.php?action=awesome-volunteers',

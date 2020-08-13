@@ -7,3 +7,15 @@ section{width:100%; float:left;}
 .image-block{float:left; width:100%; margin-bottom:10px;}
 .footer-link{float:left; width:100%; background:#222222; text-align:center; padding:30px;}
 .footer-link a{color:#A9FD00; font-size:18px; text-transform:uppercase;}
+
+.success {
+    color: green;
+    font-weight: bold;
+}
+.error {
+    color: red;
+    font-weight: bold;
+}
+.invalid {
+    color: red;
+}

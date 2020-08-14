@@ -10,17 +10,17 @@
   <div class="row">
     <div class="col">
       <div class="card shadow border-0 p-10" [ngClass]="{'placed': true}">
+        <form [formGroup]="editForm" (ngSubmit)="editRequest()">
         <div class="form-row">
           <div class="form-group col-md-12">
             <div *ngIf="!editable" (click)="switchEditable()" id="title">{{title}}</div>
             <input *ngIf="editable" formControlName="title" class="form-control" id="title" value="{{title}}" />
           </div>
         </div>
-        <form [formGroup]="editForm" (ngSubmit)="editRequest()">
         <div class="form-group">
           <label for="inputAddress">Message</label>
-          <div *ngIf="!editable" formControlName="request" (click)="switchEditable()">{{message}}</div>
-          <textarea rows="6" *ngIf="editable" class="form-control" id="message">{{message}}"</textarea>
+          <div *ngIf="!editable" (click)="switchEditable()">{{message}}</div>
+          <textarea rows="6" formControlName="request" *ngIf="editable" class="form-control" id="message">{{message}}"</textarea>
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -44,9 +44,9 @@
             (click)="cancelRemove()">Cancel</button>
           <button *ngIf="show_confirm_cancel" type="button" class="btn btn-danger"
             (click)="confirmRemove()">Confirm</button>
-          <div *ngIf="show_confirm_cancel">{{removal_content}}</div>
+          <div [ngClass]="{'success': deleteRequest, 'error': !deleteRequest}">{{removal_content}}</div>
         </div>
-        <div *ngIf="!request_already_picked && !memberOwnsRequest()">
+        <div *ngIf="! request_already_picked && !memberOwnsRequest()">
           <div *ngIf="total_volunteers > 0; then thenBlock else elseBlock"></div>
         </div>
         <div *ngIf="request_already_picked">Thanks for picking this request</div>
@@ -55,8 +55,7 @@
             <app-comments [object_id]="request_id"></app-comments>
           </div>
         </div>
-
-        <ng-template #thenBlock>ß
+        <ng-template #thenBlock>
           <div class="row">
             <div class="col-md text-right">
               <button *ngIf="!request_already_picked" type="button" class="btn btn-success" (click)="taskPicked()">I Can

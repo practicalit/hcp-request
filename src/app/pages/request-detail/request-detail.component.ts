@@ -27,6 +27,7 @@ export class RequestDetailComponent implements OnInit {
   //this is to show if the current volunteer has picked the request.
   request_already_picked: boolean = false;
   editable: boolean = false;
+  deleteRequest: boolean;
 
   editForm: FormGroup;
   constructor(
@@ -48,6 +49,11 @@ export class RequestDetailComponent implements OnInit {
         }
       }
     );
+    
+    this.editForm = this.formBuilder.group({
+      title: ['', [Validators.required, Validators.minLength(20)]],
+      request: ['', Validators.required]
+    });
   }
 
   /**
@@ -84,7 +90,16 @@ export class RequestDetailComponent implements OnInit {
   }
 
   confirmRemove() {
-    this.removal_content = "Removal triggered."
+    this.requestService.removeRequest(this.request_id).subscribe(response => {
+      this.show_confirm_cancel = false;
+      if(response.success) {
+        this.deleteRequest = true;
+        this.removal_content = "Request detail deleted.";
+      } else {
+        this.deleteRequest = false;
+        this.removal_content = "Failed while deteting request detail.";
+      }
+    });
   }
 
   /**
@@ -94,7 +109,7 @@ export class RequestDetailComponent implements OnInit {
     //the form shall be editable only for the owner of the request.
     if (this.memberOwnsRequest()) {
       this.editable = true;
-      this.instantiateForm();
+      this.setFormValue();
     }
   }
 
@@ -102,18 +117,16 @@ export class RequestDetailComponent implements OnInit {
    * If the form is in the editable form, this handles the updated form
    */
   editRequest() {
-    this.editForm = this.formBuilder.group({
-      priority: ['', Validators.required],
-      title: ['', [Validators.required, Validators.minLength(20)]],
-      request: ['', Validators.required]
-    });
+    this.editForm.controls.title.setValue('');
+    this.editForm.controls.request.setValue('');
   }
 
   /**
    * Prepare the form if it needed to be updated.
    */
-  instantiateForm() {
-
+  setFormValue() {
+    this.editForm.controls.title.setValue(this.title);
+    this.editForm.controls.request.setValue(this.message);
   }
 
   /**

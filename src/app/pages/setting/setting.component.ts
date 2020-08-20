@@ -14,7 +14,7 @@ export class SettingComponent implements OnInit {
   allowSMS: boolean = false;
 
   settingForm: FormGroup;
-
+  message: string
   constructor(
     private formBuilder: FormBuilder,
     private individualService: IndividualService
@@ -40,6 +40,11 @@ export class SettingComponent implements OnInit {
     setting.sms_per_day = this.settingForm.controls['smsPerDay'].value;
     setting.sms_per_week = this.settingForm.controls['smsPerWeek'].value;
     this.individualService.updateSetting(setting).subscribe(result => {
+      if (result.success) {
+        this.message = "updated successfully"
+      } else {
+        this.message = "please try again"
+      }
       console.log(result);
     });
   }

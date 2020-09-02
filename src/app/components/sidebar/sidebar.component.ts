@@ -37,7 +37,7 @@ export class SidebarComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    this.menuItems = this.authService.getRole()=="BALEMUYA" ? ROUTES : ROUTES.filter(menuItem => menuItem.title != 'Request')
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
    });

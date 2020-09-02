@@ -36,7 +36,9 @@
         <label for="sms_per_week">SMS Per week</label>
         <input formControlName="smsPerWeek" type="text" class="form-control" id="sms_per_week">
       </div>
+     
     </div>
     <button *ngIf="allowSMS || allowEmail" type="onsubmit" class="btn btn-primary">Submit</button>
+    <div> {{message}} </div>
   </div>
 </form>

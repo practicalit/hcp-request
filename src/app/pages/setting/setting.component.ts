@@ -20,6 +20,7 @@ export class SettingComponent implements OnInit {
   password: string;
   form: any;
 
+  message: string
   constructor(
     private formBuilder: FormBuilder,
     private individualService: IndividualService,
@@ -55,6 +56,9 @@ export class SettingComponent implements OnInit {
         this.authService.setLoggedMemberProperty('sms_per_day', individual_setting.sms_per_day);
         this.authService.setLoggedMemberProperty('email_per_week', individual_setting.email_per_week);
         this.authService.setLoggedMemberProperty('sms_per_week', individual_setting.sms_per_week);
+        this.message = "Updated Successfully";
+      } else {
+        this.message = "Please try again with correct values.";
       }
       console.log(result);
     });

@@ -19,6 +19,9 @@ export class HomeComponent implements OnInit {
   public activeView: string = "REQUEST";
 
   member_role: string;
+  request_id: number;
+  logged_member_id: number;
+  request_already_picked: boolean = false;
 
   constructor(
     private requestService: RequestService,
@@ -64,6 +67,15 @@ export class HomeComponent implements OnInit {
     this.member_role = this.authService.getRole();
   }
 
+  public taskPicked() {
+    this.requestService.taskPicked(this.request_id, this.logged_member_id).subscribe(
+      response => {
+        if (response.success) {
+          this.request_already_picked = true;
+        }
+      }
+    );
+  }
   /**
    * move this to upstairs.
    * @param path 

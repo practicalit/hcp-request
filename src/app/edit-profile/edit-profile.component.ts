@@ -6,7 +6,7 @@ import { IndividualService } from '../services/individual.service';
 import { Individual } from '../models/individual.model';
 import { Constants } from '../models/constants.model';
 import { constants } from 'buffer';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',

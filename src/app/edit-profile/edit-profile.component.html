@@ -17,6 +17,9 @@
               </div>
             </div>
           </div>
+          <div>
+                   <a [routerLink]="['/change-password']" routerLinkActive="active" class="text">Change Password</a>
+          </div>
           <div class="card-body">
             <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
               <h6 class="heading-small text-muted mb-4">User information</h6>
